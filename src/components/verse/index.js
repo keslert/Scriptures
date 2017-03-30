@@ -4,7 +4,7 @@ import Line from '../line';
 
 const StyledVerse = styled.div`
   font-size: 15px;
-  line-height: 12px;
+  line-height: 11px;
 `
 
 const Verse = ({

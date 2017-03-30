@@ -4,6 +4,8 @@ import Column from '../column';
 
 const StyledPage = styled.span`
   display: flex;
+  justify-content: center;
+  width: 100vw;
 `
 
 const Page = ({

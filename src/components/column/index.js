@@ -7,7 +7,7 @@ const StyledColumn = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin: 3rem;
-  height: 600px;
+  height: 580px;
   width: 355px;
 `
 
