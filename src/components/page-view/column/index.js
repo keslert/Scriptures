@@ -5,15 +5,16 @@ import Verse from '../verse';
 const StyledColumn = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: ${props => props.justify};
   margin: 1em 2em;
   height: 36em;
 `
 
 const Column = ({
+  isLast,
   verses
 }) => (
-  <StyledColumn>
+  <StyledColumn justify={isLast ? 'flex-start' : 'space-between'}>
     {verses.map((verse, i) => 
       <Verse key={i} {...verse} />
     )}

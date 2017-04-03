@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import PageView from '../components/page-view'
 import VerseView from '../components/verse-view'
-import { parseChapter } from '../core/generator';
 import Toolbar from '../components/toolbar';
 import { getReadingMode } from '../core/ui';
 import { StyledFlex, StyledScrollable } from '../components/common/styled-base';
+
+import { fetchBook, getActiveChapter, getActiveVerse } from '../core/scriptures';
 
 
 const StyledApp = styled.div`
@@ -23,28 +24,27 @@ const StyledReadingView = styled.div`
 
 class App extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
-      chapter: parseChapter({
-        scriptures: 'Book of Mormon',
-        book: '1 Nephi',
-        chapter: 1,
-      })
-    }
+  componentDidMount() {
+    this.props.fetchBook('1 Nephi');
   }
 
+  renderReadingView() {
+    const { chapter, verse, readingMode } = this.props;
+    if(!chapter) {
+      return <h3>Loading...</h3>
+    }
+
+    return readingMode === 'page'
+            ? <PageView {...chapter} /> 
+            : <VerseView {...chapter} />
+  }
 
   render() {
-    const { chapter } = this.state;
-    const { readingMode } = this.props;
+    const { chapter, verse, readingMode } = this.props;
     return (
       <StyledApp>
         <StyledReadingView>
-          {readingMode === 'page'
-            ? <PageView {...chapter} /> 
-            : <VerseView {...chapter} />
-          }
+          {this.renderReadingView()}
         </StyledReadingView>
         <Toolbar chapter={chapter} />
       </StyledApp>
@@ -53,9 +53,15 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createSelector(
+  getActiveChapter,
+  getActiveVerse,
   getReadingMode,
-  (readingMode) => ({
+  (chapter, verse, readingMode) => ({
     readingMode,
+    chapter,
+    verse,
   })
 )
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = Object.assign({fetchBook});
+export default connect(mapStateToProps, mapDispatchToProps)(App);

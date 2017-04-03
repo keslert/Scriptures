@@ -7,6 +7,7 @@ import App from './containers/App';
 // styles
 import '../node_modules/normalize.css/normalize.css';
 import './styles/main.css'; 
+import 'whatwg-fetch'
 
 
 const store = configureStore();

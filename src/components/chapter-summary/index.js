@@ -53,6 +53,10 @@ StyledButton.defaultProps = {
 }
 
 const ChapterSummary = ({
+  work,
+  book,
+  chapter,
+  verses,
   pages,
   readingMode,
   setReadingMode,
@@ -60,10 +64,10 @@ const ChapterSummary = ({
   return (
     <StyledChapterSummary>
       <StyledDetails>
-        <div>1 Nephi 1</div>
-        <div>34 Verses</div>
+        <div>{book} {chapter}</div>
+        <div>{verses.length} Verses</div>
         <div>Page 308</div>
-        <div>Book of Mormon</div>
+        <div>{work}</div>
       </StyledDetails>
 
       <StyledMode>

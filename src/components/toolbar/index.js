@@ -25,7 +25,7 @@ const Toolbar = ({
         <Logo />
       </StyledAbsolute>
       
-      <ChapterSummary {...chapter} />
+      {chapter && <ChapterSummary {...chapter} />}
       
       <StyledAbsolute right="20px" bottom="15px">
         

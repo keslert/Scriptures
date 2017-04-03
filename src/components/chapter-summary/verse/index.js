@@ -13,6 +13,7 @@ import {
 
 const StyledVerse = styled.div`
   border-radius: 1px;
+  margin-bottom: 2px;
   ${props => `
     height: ${props.height};
     background: ${props.background};
