@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Lusitana';
   font-size: 15px;
+  overflow: hidden;
+  font-family: 'Source Sans Pro';
 }

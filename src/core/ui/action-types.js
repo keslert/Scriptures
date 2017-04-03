@@ -1,0 +1,4 @@
+export const SET_READING_MODE = 'SET_READING_MODE';
+export const SET_ACTIVE = 'SET_ACTIVE';
+
+export const SET_HOVERED_VERSE = 'SET_HOVERED_VERSE';

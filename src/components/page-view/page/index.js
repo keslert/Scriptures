@@ -2,10 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import Column from '../column';
 
-const StyledPage = styled.span`
+const StyledPage = styled.div`
   display: flex;
   justify-content: center;
-  width: 100vw;
 `
 
 const Page = ({

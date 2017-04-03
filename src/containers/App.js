@@ -1,9 +1,27 @@
-import React, { Component } from 'react';
-
-import Chapter from '../components/chapter'
+import React from 'react';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import PageView from '../components/page-view'
+import VerseView from '../components/verse-view'
 import { parseChapter } from '../core/generator';
+import Toolbar from '../components/toolbar';
+import { getReadingMode } from '../core/ui';
+import { StyledFlex, StyledScrollable } from '../components/common/styled-base';
 
-class App extends Component {
+
+const StyledApp = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`
+
+const StyledReadingView = styled.div`
+  flex: 1;
+  overflow: auto;
+`
+
+class App extends React.Component {
 
   constructor() {
     super();
@@ -16,14 +34,28 @@ class App extends Component {
     }
   }
 
+
   render() {
     const { chapter } = this.state;
+    const { readingMode } = this.props;
     return (
-      <div className="App">
-        <Chapter {...chapter} />
-      </div>
+      <StyledApp>
+        <StyledReadingView>
+          {readingMode === 'page'
+            ? <PageView {...chapter} /> 
+            : <VerseView {...chapter} />
+          }
+        </StyledReadingView>
+        <Toolbar chapter={chapter} />
+      </StyledApp>
     );
   }
 }
 
-export default App;
+const mapStateToProps = createSelector(
+  getReadingMode,
+  (readingMode) => ({
+    readingMode,
+  })
+)
+export default connect(mapStateToProps)(App);

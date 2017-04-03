@@ -1,4 +1,4 @@
-import { flatten, chunk, groupBy, map } from 'lodash';
+import { flatten, chunk, groupBy, map, values } from 'lodash';
 
 const _1nephi1_1 = JSON.parse(`[
   {
@@ -106,7 +106,6 @@ const _1nephi1_1 = JSON.parse(`[
  
 export function parseChapter(chapter) {  
   const linesPerColumn = 20;
-  const lineWidth = 300;
   const columnsPerPage = 2;
 
   const allLines = flatten(_1nephi1_1.map((verse, i) => {
@@ -118,7 +117,7 @@ export function parseChapter(chapter) {
 
   const columns = chunk(allLines, linesPerColumn).map((column, i) => ({
     verses: map(groupBy(column, line => line.verse), (verse, verseIndex) => ({
-      verseIndex: i,
+      verse: verseIndex,
       lines: verse,
     })),
     columnIndex: i,
@@ -130,7 +129,14 @@ export function parseChapter(chapter) {
   }));
 
   return {
-    pages
+    work: 'book-of-mormon',
+    book: '1-nephi',
+    chapter: 1,
+    verses: map(groupBy(allLines, 'verse'), lines => ({
+      lines,
+      verse: lines[0].verse,
+    })),
+    pages,
   }
 }
 

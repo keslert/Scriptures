@@ -6,9 +6,8 @@ const StyledColumn = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 3rem;
-  height: 580px;
-  width: 355px;
+  margin: 1em 2em;
+  height: 36em;
 `
 
 const Column = ({

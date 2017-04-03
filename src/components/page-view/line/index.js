@@ -7,7 +7,7 @@ const StyledLine = styled.div`
 `
 
 const StyledNumber = styled.span`
-  margin: 0 8px;
+  margin: 0 0.5em;
 `
 
 const StyledWords = styled.span`
