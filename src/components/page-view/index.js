@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Page from './page';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 const StyledPageView = styled.div`
   height: 100%;
@@ -12,21 +13,17 @@ const StyledPageView = styled.div`
 `;
 
 const PageView = ({
-  pages,
+  page,
 }) => {
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    afterChange: (index) => console.log(index),
-  };
-
   return (
-    <StyledPageView>
-      <Page {...pages[0]} />
-    </StyledPageView>
+    <CSSTransitionGroup
+      transitionName="t1"
+      transitionEnterTimeout={300}
+      transitionLeaveTimeout={300}>
+      <StyledPageView key={JSON.stringify(page)}>
+        <Page {...page} />
+      </StyledPageView>
+    </CSSTransitionGroup>
   )
 }
 export default PageView;

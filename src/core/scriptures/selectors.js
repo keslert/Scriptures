@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { getActive } from '../ui';
+import { getActive } from '../ui/selectors';
 import { parseBook } from './parse';
 
 export function getScriptures(state) {
@@ -33,12 +33,23 @@ export const getActiveChapter = createSelector(
   }
 )
 
+export const getActivePage = createSelector(
+  getActiveChapter,
+  getActive,
+  (chapter, active) => {
+    if(chapter) {
+      return chapter.pages[active.page];
+    }
+    return null;
+  }
+)
+
 export const getActiveVerse = createSelector(
   getActiveChapter,
   getActive,
   (chapter, active) => {
     if(chapter) {
-      return chapter[active.verse];
+      return chapter.verses[active.verse];
     }
     return null;
   }

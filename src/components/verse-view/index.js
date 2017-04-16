@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Verse from '../page-view/verse';
 import theme from '../../styles/theme';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 const StyledVerseView = styled.div`
   height: 100%;
@@ -26,28 +27,22 @@ const StyledTitle = styled.div`
 `
 
 const VerseView = ({
-  book,
-  chapter,
-  verses,
+  verse,
+  label,
 }) => {
 
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    afterChange: (index) => console.log(index),
-  };
-
   return (
-    <StyledVerseView>
-      <Verse {...verses[0]} />
-
-      <StyledTitle>
-        1 Nephi 1 : 1
-      </StyledTitle>
-    </StyledVerseView>
+    <CSSTransitionGroup
+      transitionName="t1"
+      transitionEnterTimeout={300}
+      transitionLeaveTimeout={300}>
+      <StyledVerseView key={label}>
+        <Verse {...verse} />
+        <StyledTitle>
+          {label}
+        </StyledTitle>
+      </StyledVerseView>
+    </CSSTransitionGroup>
   )
 }
 export default VerseView;

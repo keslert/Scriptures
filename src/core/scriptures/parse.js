@@ -1,4 +1,4 @@
-import { flatten, chunk, groupBy, map, values } from 'lodash';
+import { flatten, chunk, groupBy, map } from 'lodash';
 
 
 export function parseBook(rawJson) {
@@ -16,7 +16,7 @@ function parseChapter(chapter) {
   const allLines = flatten(chapter.verses.map((verse, i) => {
     return breakTextIntoLines(verse.text).map(line => ({
       ...line,
-      verse: i + 1,
+      verse: i,
     }))
   }))
 
@@ -40,7 +40,7 @@ function parseChapter(chapter) {
   return {
     work: 'book-of-mormon',
     book: '1-nephi',
-    chapter: 1,
+    chapter: 0,
     verses: map(groupBy(allLines, 'verse'), lines => ({
       lines,
       verse: lines[0].verse,

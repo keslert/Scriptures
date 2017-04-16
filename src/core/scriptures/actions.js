@@ -21,7 +21,6 @@ export function fetchBook(name) {
       fetch(`https://raw.githubusercontent.com/keslert/Scriptures/master/json/${key}.json`)
       .then(response => response.text())
       .then(response => dispatch(setScripturesCache(key, response)))
-      // .catch(error => console.log(error));
     }
   }
 }

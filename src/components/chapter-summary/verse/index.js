@@ -8,6 +8,7 @@ import {
   isVerseActive, 
   setHoveredVerse, 
   getReadingMode,
+  setActiveVerse,
 } from '../../../core/ui';
 
 
@@ -23,15 +24,18 @@ const StyledVerse = styled.div`
 const Verse = ({
   verse,
   lines,
-  setHoveredVerse,
+  readingMode,
   isHovered,
   isActive,
+  setHoveredVerse,
+  setActiveVerse,
 }) => {
 
-  const background = isActive ? theme.secondary : isHovered ? theme.grey : theme.offLight;
+  const background = isActive || isHovered ? theme.grey : theme.offLight;
 
   return (
     <StyledVerse
+      onClick={() => setActiveVerse(lines[0].verse)}
       background={background}
       onMouseEnter={() => setHoveredVerse(verse)}
       onMouseLeave={() => setHoveredVerse(null)}
@@ -51,6 +55,6 @@ const mapStateToProps = createSelector(
     readingMode,
   })
 )
-const mapDispatchToProps = Object.assign({setHoveredVerse})
+const mapDispatchToProps = Object.assign({setHoveredVerse, setActiveVerse})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Verse);

@@ -26,7 +26,7 @@ const Line = ({
   words,
 }) => (
   <StyledLine>
-    {isFirst ? <StyledNumber>{verse}</StyledNumber> : null}
+    {isFirst ? <StyledNumber>{verse + 1}</StyledNumber> : null}
     <StyledWords justify={isLast ? 'flex-start' : 'space-between'}>
       {words.map((word, i) => <Word key={i} {...word} />)}
     </StyledWords>

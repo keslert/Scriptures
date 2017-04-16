@@ -6,6 +6,7 @@ import theme from '../../../styles/theme';
 const StyledVerse = styled.div`
   font-family: 'Lusitana';
   line-height: 0.7em;
+  margin-bottom: 0.2em;
   width: 24em;
   color: ${theme.text};
 `

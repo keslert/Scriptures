@@ -5,11 +5,19 @@ import { createSelector } from 'reselect';
 import PageView from '../components/page-view'
 import VerseView from '../components/verse-view'
 import Toolbar from '../components/toolbar';
-import { getReadingMode } from '../core/ui';
-import { StyledFlex, StyledScrollable } from '../components/common/styled-base';
+import { getReadingMode, uiActions } from '../core/ui';
+import { StyledCentered } from '../components/common/styled-base';
 
-import { fetchBook, getActiveChapter, getActiveVerse } from '../core/scriptures';
+import { getActive } from '../core/ui';
+import { fetchBook, getActiveChapter, getActivePage, getActiveVerse } from '../core/scriptures';
 
+import { capitalize } from '../core/utils';
+
+import Spinner from 'react-spinkit';
+import $ from 'jquery';
+
+
+// http://jsfiddle.net/BinaryMuse/f51jbw2k/
 
 const StyledApp = styled.div`
   display: flex;
@@ -25,22 +33,39 @@ const StyledReadingView = styled.div`
 class App extends React.Component {
 
   componentDidMount() {
-    this.props.fetchBook('1 Nephi');
+    this.props.fetchBook('Mosiah');
+
+    $(document).on('keydown', e => {
+      const tag = e.target.tagName.toLowerCase();
+      if(tag === 'input' || tag === 'textarea') {
+        return;
+      }
+
+      if(e.which === 37) {
+        this.props.previous();
+      } else if(e.which === 39) {
+        this.props.advance();
+      } else if(e.which == 38) {
+        this.props.previousChapter();
+      } else if(e.which == 40) {
+        this.props.advanceChapter();
+      }
+    })
   }
 
   renderReadingView() {
-    const { chapter, verse, readingMode } = this.props;
-    if(!chapter) {
-      return <h3>Loading...</h3>
+    const { active, page, verse, readingMode } = this.props;
+    if(!page) {
+      return <StyledCentered><Spinner spinnerName='wave' /></StyledCentered>
     }
 
     return readingMode === 'page'
-            ? <PageView {...chapter} /> 
-            : <VerseView {...chapter} />
+            ? <PageView page={page} /> 
+            : <VerseView verse={verse} label={`${capitalize(active.book)} ${active.chapter + 1} : ${active.verse + 1}`} />
   }
 
   render() {
-    const { chapter, verse, readingMode } = this.props;
+    const { chapter } = this.props;
     return (
       <StyledApp>
         <StyledReadingView>
@@ -53,15 +78,19 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createSelector(
+  getActive,
   getActiveChapter,
+  getActivePage,
   getActiveVerse,
   getReadingMode,
-  (chapter, verse, readingMode) => ({
+  (active, chapter, page, verse, readingMode) => ({
     readingMode,
+    active,
     chapter,
+    page,
     verse,
   })
 )
 
-const mapDispatchToProps = Object.assign({fetchBook});
+const mapDispatchToProps = Object.assign({fetchBook}, uiActions);
 export default connect(mapStateToProps, mapDispatchToProps)(App);

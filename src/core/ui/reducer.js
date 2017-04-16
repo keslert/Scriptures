@@ -1,24 +1,34 @@
 import * as types from './action-types';
 import { Record } from 'immutable'
 
-import { filter } from 'lodash';
-
-export const uiState = new Record({
-  readingMode: 'verse',
+export const UiState = new Record({
+  readingMode: 'page',
   active: {
     work: 'book-of-mormon',
-    book: '1-nephi',
-    chapter: 1,
-    verse: 0,
-    page: 0,
+    book: 'mosiah',
+    chapter: 0,
+    verse: 1,
+    page: 1,
   },
   hoveredVerse: null,
 }, 'uiState');
 
-export function uiReducer(state = uiState(), {payload, type}) {
+export function uiReducer(state = UiState(), {payload, type}) {
   switch (type) {
     case types.SET_ACTIVE:
       return state.set('active', payload);
+    
+    case types.SET_ACTIVE_BOOK:
+      return state.set('active', {...state.active, book: payload});
+
+    case types.SET_ACTIVE_CHAPTER:
+      return state.set('active', {...state.active, chapter: payload});
+    
+    case types.SET_ACTIVE_PAGE:
+      return state.set('active', {...state.active, page: payload});
+    
+    case types.SET_ACTIVE_VERSE:
+      return state.set('active', {...state.active, verse: payload});
 
     case types.SET_READING_MODE:
       return state.set('readingMode', payload);

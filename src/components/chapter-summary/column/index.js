@@ -21,4 +21,5 @@ const Column = ({
     )}
   </StyledColumn>
 )
+
 export default Column;

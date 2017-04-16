@@ -29,3 +29,10 @@ export const StyledAbsolute = styled.div`
     ${props.height && `height: ${props.height};`};
   `};
 `;
+
+export const StyledCentered = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`

@@ -6,7 +6,8 @@ import Page from './page';
 import theme from '../../styles/theme';
 import tinycolor from 'tinycolor2';
 
-import { getReadingMode, setReadingMode } from '../../core/ui';
+import { capitalize } from '../../core/utils';
+import { getActive, getReadingMode, setReadingMode } from '../../core/ui';
 
 const StyledChapterSummary = styled.div`
   display: flex;
@@ -64,10 +65,9 @@ const ChapterSummary = ({
   return (
     <StyledChapterSummary>
       <StyledDetails>
-        <div>{book} {chapter}</div>
+        <div>{capitalize(book)} {chapter + 1}</div>
         <div>{verses.length} Verses</div>
-        <div>Page 308</div>
-        <div>{work}</div>
+        <div>{capitalize(work)}</div>
       </StyledDetails>
 
       <StyledMode>
@@ -80,9 +80,7 @@ const ChapterSummary = ({
 
       <StyledPageIcons>
         {pages.map((page, i) =>
-          <div key={i}>
-            <Page {...page} readingMode={readingMode} />
-          </div>
+          <Page key={i} {...page} readingMode={readingMode} page={i} />
         )}
       </StyledPageIcons>
     </StyledChapterSummary>
@@ -90,8 +88,12 @@ const ChapterSummary = ({
 }
 
 const mapStateToProps = createSelector(
+  getActive,
   getReadingMode,
-  (readingMode) => ({
+  (active, readingMode) => ({
+    work: active.work,
+    book: active.book,
+    chapter: active.chapter,
     readingMode,
   })
 )

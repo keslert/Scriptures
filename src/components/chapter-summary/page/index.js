@@ -1,7 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import styled from 'styled-components';
 import Column from '../column';
 import theme from '../../../styles/theme';
+import { setActivePage, isPageActive } from '../../../core/ui';
 
 const StyledPage = styled.span`
   display: flex;
@@ -16,16 +19,40 @@ const StyledPage = styled.span`
       }
     }
   `};
+
+  ${props => `
+    ${props.active && `
+      .verse {
+        background: ${theme.grey};
+      }
+    `}
+  `}
 `
 
 const Page = ({
+  page,
+  setActivePage,
+  isActive,
   columns,
   readingMode,
-}) => (
-  <StyledPage hover={readingMode === 'page'}>
-    {columns.map((column, i) => 
-      <Column key={i} {...column} readingMode={readingMode} />
-    )}
-  </StyledPage>
+}) => {
+
+  const pageMode = readingMode === 'page';
+  return (
+    <StyledPage hover={pageMode} active={pageMode && isActive} onClick={() => setActivePage(page)}>
+      {columns.map((column, i) => 
+        <Column key={i} {...column} readingMode={readingMode} />
+      )}
+    </StyledPage>
+  )
+}
+
+const mapStateToProps = createSelector(
+  isPageActive,
+  (isActive) => ({
+    isActive,
+  })
 )
-export default Page;
+
+const mapDispatchToProps = Object.assign({setActivePage});
+export default connect(mapStateToProps, mapDispatchToProps)(Page);

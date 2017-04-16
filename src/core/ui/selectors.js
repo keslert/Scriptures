@@ -19,5 +19,9 @@ export function isVerseHovered(state, props) {
 }
 
 export function isVerseActive(state, props) {
-  return getActive(state).verse === props.verse;
+  return getActive(state).verse === Number.parseInt(props.verse, 10);
+}
+
+export function isPageActive(state, props) {
+  return getActive(state).page === Number.parseInt(props.pageIndex, 10);
 }
