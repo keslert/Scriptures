@@ -30,24 +30,37 @@ const StyledReadingView = styled.div`
 class App extends React.Component {
 
   componentDidMount() {
-    this.props.fetchBook('alma');
-
+    this.fetchBook();
     $(document).on('keydown', e => {
       const tag = e.target.tagName.toLowerCase();
       if(tag === 'input' || tag === 'textarea') {
         return;
       }
 
-      if(e.which === 37) {
-        this.props.previous();
-      } else if(e.which === 39) {
-        this.props.advance();
-      } else if(e.which === 38) {
-        this.props.previousChapter();
-      } else if(e.which === 40) {
-        this.props.advanceChapter();
+      if(e.which === 37 || e.which === 40) {
+        if(e.shiftKey) {
+          this.props.previousChapter();
+        } else {
+          this.props.previous();
+        }
+      } else if(e.which === 39 || e.which === 38) {
+        if(e.shiftKey) {
+          this.props.advanceChapter();
+        } else {
+          this.props.advance();
+        }
       }
     })
+  }
+
+  componentDidUpdate(oldProps) {
+    if(this.props.active.book !== oldProps.active.book) {
+      this.fetchBook();
+    }
+  }
+
+  fetchBook() {
+    this.props.fetchBook(this.props.active.book);
   }
 
   renderReadingView() {

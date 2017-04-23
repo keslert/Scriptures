@@ -111,7 +111,7 @@ export function advanceChapter() {
         chapter: active.chapter + 1
       }))
     } else {
-      const nextBook = getNextBook(state)
+      const nextBook = getNextBook(active.book)
       if(nextBook) {
         dispatch(setActive({...active,
           book: nextBook.name,
@@ -142,9 +142,9 @@ export function previousChapter(startAtEnd) {
       if(prevBook) {
         dispatch(setActive({...active,
           book: prevBook.name,
-          chapter: 999,
-          page: 999,
-          verse: 999,
+          chapter: prevBook.chapters - 1,
+          page: 0,
+          verse: 0,
         }))
       }
     }

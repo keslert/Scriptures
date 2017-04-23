@@ -13,11 +13,13 @@ export function setScripturesCache(key, rawJson) {
   }
 }
 
+const fetching = {};
 export function fetchBook(name) {
   const key = name.toLowerCase().replace(/ /g, '-');
   return (dispatch, getState) => {
     const book = getScripturesCache(getState())[key];
-    if(!book) {
+    if(!book && !fetching[name]) {
+      fetching[name] = true;
       fetch(`https://raw.githubusercontent.com/keslert/Scriptures/master/json/${key}.json`)
       .then(response => response.text())
       .then(response => dispatch(setScripturesCache(key, response)))
