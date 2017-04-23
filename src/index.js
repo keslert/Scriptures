@@ -6,6 +6,7 @@ import App from './containers/App';
 
 // styles
 import '../node_modules/normalize.css/normalize.css';
+import '../node_modules/rc-cascader/assets/index.css';; 
 import './styles/main.css'; 
 import 'whatwg-fetch'
 

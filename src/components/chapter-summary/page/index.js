@@ -9,7 +9,7 @@ import { setActivePage, isPageActive } from '../../../core/ui';
 const StyledPage = styled.span`
   display: flex;
   justify-content: center;
-  margin-right: 15px;
+  margin-right: 0.75em;
   
   cursor: pointer;
   ${props => props.hover && `

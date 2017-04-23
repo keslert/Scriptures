@@ -18,15 +18,15 @@ export default function configureStore(initialState) {
     )
   );
   
-  // persistStore(store, {
-  //   whitelist: ['scriptures', 'ui'],
-  //   transforms: [
-  //     immutableTransform({
-  //       records: [ScripturesState, UiState],
-  //       whitelist: ['scriptures', 'ui']
-  //     })
-  //   ]
-  // });
+  persistStore(store, {
+    whitelist: ['scriptures', 'ui'],
+    transforms: [
+      immutableTransform({
+        records: [ScripturesState, UiState],
+        whitelist: ['scriptures', 'ui']
+      })
+    ]
+  });
 
   return store;
 }

@@ -5,10 +5,10 @@ export const UiState = new Record({
   readingMode: 'page',
   active: {
     work: 'book-of-mormon',
-    book: 'mosiah',
+    book: 'alma',
     chapter: 0,
-    verse: 1,
-    page: 1,
+    verse: 0,
+    page: 0,
   },
   hoveredVerse: null,
 }, 'uiState');
@@ -16,7 +16,7 @@ export const UiState = new Record({
 export function uiReducer(state = UiState(), {payload, type}) {
   switch (type) {
     case types.SET_ACTIVE:
-      return state.set('active', payload);
+      return state.set('active', Object.assign({}, state.active, payload));
     
     case types.SET_ACTIVE_BOOK:
       return state.set('active', {...state.active, book: payload});

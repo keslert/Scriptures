@@ -80,9 +80,7 @@ export function previous() {
   return (dispatch, getState) => {
     const state = getState();
     const readingMode = getReadingMode(state);
-    
     const active = getActive(state);
-    const chapter = getActiveChapter(state);
 
     if(readingMode === 'verse') {
       if(active.verse > 0) {

@@ -16,24 +16,21 @@ import { capitalize } from '../core/utils';
 import Spinner from 'react-spinkit';
 import $ from 'jquery';
 
-
-// http://jsfiddle.net/BinaryMuse/f51jbw2k/
-
 const StyledApp = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-`
+`;
 
 const StyledReadingView = styled.div`
   flex: 1;
   overflow: auto;
-`
+`;
 
 class App extends React.Component {
 
   componentDidMount() {
-    this.props.fetchBook('Mosiah');
+    this.props.fetchBook('alma');
 
     $(document).on('keydown', e => {
       const tag = e.target.tagName.toLowerCase();
@@ -45,9 +42,9 @@ class App extends React.Component {
         this.props.previous();
       } else if(e.which === 39) {
         this.props.advance();
-      } else if(e.which == 38) {
+      } else if(e.which === 38) {
         this.props.previousChapter();
-      } else if(e.which == 40) {
+      } else if(e.which === 40) {
         this.props.advanceChapter();
       }
     })

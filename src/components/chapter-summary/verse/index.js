@@ -39,7 +39,7 @@ const Verse = ({
       background={background}
       onMouseEnter={() => setHoveredVerse(verse)}
       onMouseLeave={() => setHoveredVerse(null)}
-      height={`${lines.length * 3}px`} 
+      height={`${lines.length / 7}em`} 
       className="verse" 
       />
   )

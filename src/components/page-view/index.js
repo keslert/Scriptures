@@ -19,7 +19,7 @@ const PageView = ({
     <CSSTransitionGroup
       transitionName="t1"
       transitionEnterTimeout={300}
-      transitionLeaveTimeout={300}>
+      transitionLeaveTimeout={0}>
       <StyledPageView key={JSON.stringify(page)}>
         <Page {...page} />
       </StyledPageView>

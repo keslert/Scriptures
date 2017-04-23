@@ -1,6 +1,6 @@
 export default {
   text: '#303030',
-  primary: '#55acee',
+  primary: '#F46965',
   secondary: '#55acee',
   light: '#fff',
   offLight: '#eaeaea',

@@ -10,6 +10,7 @@
     "jquery": "^2.2.4",
     "lodash": "^4.17.4",
     "normalize.css": "^5.0.0",
+    "rc-cascader": "^0.11.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^4.4.5",

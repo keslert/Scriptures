@@ -6,8 +6,12 @@ import Page from './page';
 import theme from '../../styles/theme';
 import tinycolor from 'tinycolor2';
 
+import Cascader from 'rc-cascader';
+
+import { range, map } from 'lodash';
 import { capitalize } from '../../core/utils';
-import { getActive, getReadingMode, setReadingMode } from '../../core/ui';
+import { getActive, getReadingMode, setReadingMode, setActive } from '../../core/ui';
+import { scriptures } from '../../core/scriptures/utils';
 
 const StyledChapterSummary = styled.div`
   display: flex;
@@ -20,6 +24,9 @@ const StyledDetails = styled.div`
   margin-right: 10px;
   color: ${theme.secondary};
   text-align: right;
+  > div {
+    outline: none;
+  }
 `
 
 const StyledPageIcons = styled.div`
@@ -61,13 +68,37 @@ const ChapterSummary = ({
   pages,
   readingMode,
   setReadingMode,
+  setActive,
 }) => {
+
+
+  const options = map(scriptures, work => ({
+    label: capitalize(work.name),
+    value: work.name,
+    children: map(work.books, book => ({
+      label: capitalize(book.name),
+      value: book.name,
+      children: range(0, book.chapters).map(i => ({
+        label: i + 1,
+        value: i,
+      }))
+    }))
+  }))
+
+  const onChange = (value) => {
+    const work = value[0];
+    const book = value[1];
+    const chapter = value[2];
+    setActive({work, book, chapter, page: 0, verse: 0});
+  }
+
   return (
     <StyledChapterSummary>
       <StyledDetails>
-        <div>{capitalize(book)} {chapter + 1}</div>
+        <Cascader options={options} dropdownMenuColumnStyle={{width: 140}} onChange={onChange}>
+          <div>{capitalize(book)} {chapter + 1}</div>
+        </Cascader>
         <div>{verses.length} Verses</div>
-        <div>{capitalize(work)}</div>
       </StyledDetails>
 
       <StyledMode>
@@ -98,6 +129,6 @@ const mapStateToProps = createSelector(
   })
 )
 
-const mapDispatchToProps = Object.assign({setReadingMode});
+const mapDispatchToProps = Object.assign({setReadingMode, setActive});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChapterSummary);

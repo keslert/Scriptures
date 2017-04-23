@@ -15,15 +15,9 @@ const StyledVerseView = styled.div`
 
 const StyledTitle = styled.div`
   margin-top: 1em;
-  color: ${theme.primary};
+  color: ${theme.secondary};
   font-size: 0.9em;
   font-family: 'Lusitana';
-  &:before {
-    content: '';
-    width: 10px;
-    height: 2px;
-    background: ${theme.primary};
-  }
 `
 
 const VerseView = ({
@@ -35,7 +29,7 @@ const VerseView = ({
     <CSSTransitionGroup
       transitionName="t1"
       transitionEnterTimeout={300}
-      transitionLeaveTimeout={300}>
+      transitionLeaveTimeout={0}>
       <StyledVerseView key={label}>
         <Verse {...verse} />
         <StyledTitle>

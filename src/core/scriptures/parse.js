@@ -10,7 +10,7 @@ export function parseBook(rawJson) {
 }
 
 function parseChapter(chapter) {  
-  const linesPerColumn = 20;
+  const linesPerColumn = 22;
   const columnsPerPage = 2;
 
   const allLines = flatten(chapter.verses.map((verse, i) => {
@@ -52,7 +52,7 @@ function parseChapter(chapter) {
 function breakTextIntoLines(text) {
   const words = text.split(' ');
 
-  const maxLength = 52;
+  const maxLength = 50;
 
   const concatenatedWords = words.reduce((result, word) => {
     const currentIndex = result.length - 1;

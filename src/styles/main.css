@@ -23,12 +23,12 @@ body {
 }
 
 .t1-leave {
-  opacity: 1;
+  opacity: 0;
   transform: translate3d(0, 0, 0);
 }
 
 .t1-leave.t1-leave-active {
   opacity: 0.01;
   transform: translate3d(25px, 0, 0);
-  transition: all 500ms ease-in;
+  transition: all 300ms ease-in;
 }
