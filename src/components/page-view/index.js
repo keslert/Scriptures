@@ -10,6 +10,7 @@ const StyledPageView = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 16px;
+  user-select: none;
 `;
 
 const PageView = ({

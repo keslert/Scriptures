@@ -31,7 +31,16 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchBook();
-    $(document).on('keydown', e => {
+    const { 
+      previous, 
+      previousChapter, 
+      advance, 
+      advanceChapter, 
+      onMouseUp, 
+    } = this.props;
+
+    $(document)
+    .on('keydown', e => {
       const tag = e.target.tagName.toLowerCase();
       if(tag === 'input' || tag === 'textarea') {
         return;
@@ -39,17 +48,20 @@ class App extends React.Component {
 
       if(e.which === 37 || e.which === 40) {
         if(e.shiftKey) {
-          this.props.previousChapter();
+          previousChapter();
         } else {
-          this.props.previous();
+          previous();
         }
       } else if(e.which === 39 || e.which === 38) {
         if(e.shiftKey) {
-          this.props.advanceChapter();
+          advanceChapter();
         } else {
-          this.props.advance();
+          advance();
         }
       }
+    })
+    .on('mouseup', () => {
+      onMouseUp(null);
     })
   }
 

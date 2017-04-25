@@ -1,4 +1,4 @@
-import { findIndex, find } from 'lodash';
+import { findIndex } from 'lodash';
 
 const bookOfMormon = [
   {name: '1-nephi', chapters: 22 },
@@ -105,9 +105,3 @@ export function getPreviousBook(name) {
   const index = findIndex(bookOfMormon, book => book.name === name);
   return bookOfMormon[index - 1];
 }
-
-// export function getChapters(work, book) {
-//   const _work = find(scriptures, ({name}) => name === work);
-//   const _book = find(_work.books, ({name}) => name === book);
-//   return _book.chapters;
-// }

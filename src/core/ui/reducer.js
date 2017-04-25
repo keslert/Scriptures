@@ -5,12 +5,15 @@ export const UiState = new Record({
   readingMode: 'page',
   active: {
     work: 'book-of-mormon',
-    book: 'alma',
+    book: '1-nephi',
     chapter: 0,
     verse: 0,
     page: 0,
   },
+  
   hoveredVerse: null,
+  mousedDownWord: null,
+  selectedRange: null,
 }, 'uiState');
 
 export function uiReducer(state = UiState(), {payload, type}) {
@@ -35,6 +38,31 @@ export function uiReducer(state = UiState(), {payload, type}) {
 
     case types.SET_HOVERED_VERSE:
       return state.set('hoveredVerse', payload);
+
+    case types.ON_HOVERED_WORD:
+      if(state.mousedDownWord) {
+        const reversed = payload.wordIndex < state.mousedDownWord.get('wordIndex');
+        return state.merge({
+          selectedRange: reversed 
+            ? {start: payload, end: state.mousedDownWord} 
+            : {start: state.mousedDownWord, end: payload}
+        })
+      }
+      return state;
+
+    case types.ON_MOUSED_DOWN_WORD:
+      return state.merge({
+        mousedDownWord: payload,
+        selectedRange: payload 
+        ? { start: payload, end: payload }
+        : null
+      });
+
+    case types.ON_MOUSE_UP:
+      return state.merge({
+        mousedDownWord: null,
+      })
+    
 
     default: 
       return state;

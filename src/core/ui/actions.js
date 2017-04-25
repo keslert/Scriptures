@@ -52,6 +52,26 @@ export function setHoveredVerse(verse) {
   }
 }
 
+export function onHoveredWord(word) {
+  return {
+    type: types.ON_HOVERED_WORD,
+    payload: word,
+  }
+}
+
+export function onMousedDownWord(word) {
+  return {
+    type: types.ON_MOUSED_DOWN_WORD,
+    payload: word,
+  }
+}
+
+export function onMouseUp() {
+  return {
+    type: types.ON_MOUSE_UP,
+  }
+}
+
 export function advance() {
   return (dispatch, getState) => {
     const state = getState();

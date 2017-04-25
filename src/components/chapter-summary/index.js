@@ -55,10 +55,22 @@ const StyledButton = styled.div`
       background: #fafafa;
     }
   `}
-`
+`;
 StyledButton.defaultProps = {
   color: theme.grey,
 }
+
+const StyledLabel = styled.div`
+  padding: 3px 6px;
+  outline: none;
+  ${props => props.hover && `
+    cursor: pointer;
+    text-decoration: underline;
+    &:hover {
+      background: ${theme.lightGrey};
+    }
+  `}
+`
 
 const ChapterSummary = ({
   work,
@@ -96,9 +108,9 @@ const ChapterSummary = ({
     <StyledChapterSummary>
       <StyledDetails>
         <Cascader options={options} dropdownMenuColumnStyle={{width: 140}} onChange={onChange}>
-          <div>{capitalize(book)} {chapter + 1}</div>
+          <StyledLabel hover>{capitalize(book)} {chapter + 1}</StyledLabel>
         </Cascader>
-        <div>{verses.length} Verses</div>
+        <StyledLabel>{verses.length} Verses</StyledLabel>
       </StyledDetails>
 
       <StyledMode>

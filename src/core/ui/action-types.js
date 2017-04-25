@@ -7,3 +7,7 @@ export const SET_ACTIVE_PAGE = 'SET_ACTIVE_PAGE';
 export const SET_ACTIVE_VERSE = 'SET_ACTIVE_VERSE';
 
 export const SET_HOVERED_VERSE = 'SET_HOVERED_VERSE';
+
+export const ON_HOVERED_WORD = 'ON_HOVERED_WORD';
+export const ON_MOUSED_DOWN_WORD = 'ON_MOUSED_DOWN_WORD';
+export const ON_MOUSE_UP = 'ON_MOUSE_UP';

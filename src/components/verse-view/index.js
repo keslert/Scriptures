@@ -11,6 +11,7 @@ const StyledVerseView = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  user-select: none;
 `
 
 const StyledTitle = styled.div`

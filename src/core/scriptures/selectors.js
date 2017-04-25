@@ -1,7 +1,6 @@
 import { createSelector } from 'reselect';
 import { getActive } from '../ui/selectors';
 import { parseBook } from './parse';
-import { fetchBook } from './actions';
 
 export function getScriptures(state) {
   return state.scriptures;

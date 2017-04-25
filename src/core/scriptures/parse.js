@@ -14,11 +14,14 @@ function parseChapter(chapter) {
   const columnsPerPage = 2;
 
   const allLines = flatten(chapter.verses.map((verse, i) => {
-    return breakTextIntoLines(verse.text).map(line => ({
+    return breakVerseIntoLines(verse.text, i).map(line => ({
       ...line,
       verse: i,
     }))
   }))
+
+  let wordIndex = 0;
+  allLines.forEach(line => line.words.forEach(word => word.wordIndex = wordIndex++));
 
 
   const _columns = chunk(allLines, linesPerColumn);
@@ -49,27 +52,29 @@ function parseChapter(chapter) {
   }
 }
 
-function breakTextIntoLines(text) {
+function breakVerseIntoLines(text, verseIndex) {
+  const maxLength = 50;
   const words = text.split(' ');
 
-  const maxLength = 50;
-
+  
   const concatenatedWords = words.reduce((result, word) => {
-    const currentIndex = result.length - 1;
-    const newLine = result[currentIndex] + ' ' + word;
+    const newLine = result[result.length - 1] + ' ' + word;
     if(newLine.length > maxLength) {
       result.push(word);
     } else {
-      result[currentIndex] = newLine;
+      result[result.length - 1] = newLine;
     }
     return result;
   }, ['']);
 
   const lines = concatenatedWords.map((line, i) => ({
-    words: line.trim().split(' ').map(word => ({ text: word })),
-    lineIndex: i,
+    words: line.trim().split(' ').map(word => ({ text: word, verseIndex })),
     isFirst: i === 0,
     isLast: i === concatenatedWords.length - 1,
-  }))
+  }));
+
+  // let wordIndex = 0;
+  // lines.forEach(line => line.words.forEach(word => word.wordIndex = wordIndex++));
+
   return lines;
 }
