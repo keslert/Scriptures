@@ -72,7 +72,8 @@ class App extends React.Component {
   }
 
   fetchBook() {
-    this.props.fetchBook(this.props.active.book);
+    const { active } = this.props;
+    this.props.fetchBook(active.work, active.book);
   }
 
   renderReadingView() {

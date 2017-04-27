@@ -14,8 +14,8 @@ export function setScripturesCache(key, rawJson) {
 }
 
 const fetching = {};
-export function fetchBook(name) {
-  const key = name.toLowerCase().replace(/ /g, '-');
+export function fetchBook(work, book) {
+  const key = `${work}/${book}`;
   return (dispatch, getState) => {
     const book = getScripturesCache(getState())[key];
     if(!book && !fetching[name]) {
