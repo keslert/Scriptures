@@ -17,13 +17,6 @@ export function setActive(active) {
   }
 }
 
-export function setActiveBook(book) {
-  return {
-    type: types.SET_ACTIVE_BOOK,
-    payload: book,
-  }
-}
-
 export function setActiveChapter(chapter) {
   return {
     type: types.SET_ACTIVE_CHAPTER,

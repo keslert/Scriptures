@@ -4,6 +4,7 @@ import { flatten, chunk, groupBy, map } from 'lodash';
 export function parseBook(rawJson) {
   const json = JSON.parse(rawJson);
   return {
+    work: json.work,
     book: json.book,
     chapters: json.chapters.map(parseChapter),
   }

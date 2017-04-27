@@ -18,8 +18,8 @@ export function fetchBook(work, book) {
   const key = `${work}/${book}`;
   return (dispatch, getState) => {
     const book = getScripturesCache(getState())[key];
-    if(!book && !fetching[name]) {
-      fetching[name] = true;
+    if(!book && !fetching[key]) {
+      fetching[key] = true;
       fetch(`https://raw.githubusercontent.com/keslert/Scriptures/master/json/${key}.json`)
       .then(response => response.text())
       .then(response => dispatch(setScripturesCache(key, response)))
