@@ -14,7 +14,7 @@ export const getActiveBook = createSelector(
   getScripturesCache,
   getActive,
   (cache, active) => {
-    const rawJson = cache[active.book];
+    const rawJson = cache[`${active.work}/${active.book}`];
     if(rawJson) {
       return parseBook(rawJson);
     }

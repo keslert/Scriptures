@@ -42,8 +42,6 @@ function parseChapter(chapter) {
   }));
 
   return {
-    work: 'book-of-mormon',
-    book: '1-nephi',
     chapter: 0,
     verses: map(groupBy(allLines, 'verse'), lines => ({
       lines,

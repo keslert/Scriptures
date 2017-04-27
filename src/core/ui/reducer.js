@@ -4,8 +4,8 @@ import { Record } from 'immutable'
 export const UiState = new Record({
   readingMode: 'page',
   active: {
-    work: 'new-testament',
-    book: 'mark',
+    work: 'book-of-mormon',
+    book: '1-nephi',
     chapter: 0,
     verse: 0,
     page: 0,
