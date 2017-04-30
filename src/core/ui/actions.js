@@ -10,6 +10,21 @@ export function setReadingMode(mode) {
   }
 }
 
+export function setActiveBookmark(index) {
+  return {
+    type: types.SET_ACTIVE_BOOKMARK,
+    payload: index,
+  }
+}
+
+export function addBookmark() {
+  return {
+    type: types.ADD_BOOKMARK
+  }
+}
+
+
+
 export function setActive(active) {
   return {
     type: types.SET_ACTIVE,

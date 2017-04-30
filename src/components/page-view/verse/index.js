@@ -8,7 +8,6 @@ const StyledVerse = styled.div`
   line-height: 0.7em;
   margin-bottom: 0.2em;
   width: 24em;
-  color: ${theme.text};
 `
 
 const Verse = ({

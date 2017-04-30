@@ -4,6 +4,7 @@ body {
   font-size: 15px;
   overflow: hidden;
   font-family: 'Source Sans Pro';
+  color: hsla(200, 15%, 20%, 1);
 }
 
 

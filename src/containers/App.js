@@ -5,6 +5,7 @@ import { createSelector } from 'reselect';
 import PageView from '../components/page-view'
 import VerseView from '../components/verse-view'
 import Toolbar from '../components/toolbar';
+import Sidebar from '../components/sidebar';
 import { getReadingMode, uiActions } from '../core/ui';
 import { StyledCentered } from '../components/common/styled-base';
 
@@ -95,6 +96,7 @@ class App extends React.Component {
           {this.renderReadingView()}
         </StyledReadingView>
         <Toolbar chapter={chapter} />
+        <Sidebar />
       </StyledApp>
     );
   }

@@ -8,9 +8,16 @@ export function getReadingMode(state) {
   return getUI(state).readingMode;
 }
 
-export function getActive(state) {
-  return getUI(state).active;
+export function getBookmarks(state) {
+  return getUI(state).bookmarks;
 }
+
+export function getActive(state) {
+  const ui = getUI(state);
+  return ui.bookmarks[ui.activeBookmark];
+}
+
+
 
 export function getHoveredVerse(state) {
   return getUI(state).hoveredVerse;
