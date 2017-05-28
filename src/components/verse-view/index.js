@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Verse from '../page-view/verse';
 import theme from '../../styles/theme';
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+import { FadeIn } from '../common/styled-animations';
 
 const StyledVerseView = styled.div`
   height: 100%;
@@ -12,6 +12,7 @@ const StyledVerseView = styled.div`
   justify-content: center;
   align-items: center;
   user-select: none;
+  animation: ${FadeIn} 300ms ease-out forwards;
 `
 
 const StyledTitle = styled.div`
@@ -27,17 +28,12 @@ const VerseView = ({
 }) => {
 
   return (
-    <CSSTransitionGroup
-      transitionName="t1"
-      transitionEnterTimeout={300}
-      transitionLeaveTimeout={0}>
-      <StyledVerseView key={label}>
-        <Verse {...verse} />
-        <StyledTitle>
-          {label}
-        </StyledTitle>
-      </StyledVerseView>
-    </CSSTransitionGroup>
+    <StyledVerseView key={label}>
+      <Verse {...verse} />
+      <StyledTitle>
+        {label}
+      </StyledTitle>
+    </StyledVerseView>
   )
 }
 export default VerseView;

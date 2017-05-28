@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Page from './page';
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+import { FadeIn } from '../common/styled-animations';
 
 const StyledPageView = styled.div`
   height: 100%;
@@ -11,20 +11,16 @@ const StyledPageView = styled.div`
   align-items: center;
   font-size: 16px;
   user-select: none;
+  animation: ${FadeIn} 300ms ease-out forwards;
 `;
 
 const PageView = ({
   page,
 }) => {
   return (
-    <CSSTransitionGroup
-      transitionName="t1"
-      transitionEnterTimeout={300}
-      transitionLeaveTimeout={0}>
-      <StyledPageView key={JSON.stringify(page)}>
-        <Page {...page} />
-      </StyledPageView>
-    </CSSTransitionGroup>
+    <StyledPageView key={JSON.stringify(page)}>
+      <Page {...page} />
+    </StyledPageView>
   )
 }
 export default PageView;

@@ -41,12 +41,14 @@ const sidebars = {
     label: 'Bookmarks',
     component: BookmarksSidebar,
   },
-  't2': {
+  [types.GUIDES_SIDEBAR]: {
+    key: types.GUIDES_SIDEBAR,
     label: 'Guides',
     component: BookmarksSidebar,
   },
-  't3': {
-    label: 'Chain',
+  [types.CHAINS_SIDEBAR]: {
+    key: types.CHAINS_SIDEBAR,
+    label: 'Chains',
     component: BookmarksSidebar,
   },
 }
