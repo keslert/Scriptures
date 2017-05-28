@@ -21,7 +21,7 @@ const StyledChapterSummary = styled.div`
 const StyledDetails = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 10px;
+  margin-right: 5px;
   color: ${theme.secondary};
   text-align: right;
   > div {
@@ -62,6 +62,7 @@ StyledButton.defaultProps = {
 
 const StyledLabel = styled.div`
   padding: 3px 6px;
+  font-size: 0.9em;
   outline: none;
   ${props => props.hover && `
     cursor: pointer;

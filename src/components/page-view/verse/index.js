@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Line from '../line';
-import theme from '../../../styles/theme';
 
 const StyledVerse = styled.div`
   font-family: 'Lusitana';

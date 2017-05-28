@@ -1,10 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { setActiveBookmark, addBookmark, getBookmarks } from '../../../core/ui';
 import { capitalize } from '../../../core/utils';
-import { StyledCell, StyledTitle, StyledAction } from '../styled';
+import { StyledAction } from '../styled';
+
+import SidebarCell from '../sidebar-cell';
+import SidebarHeading from '../sidebar-heading';
 
 import BookmarkIcon from 'react-icons/lib/md/bookmark';
 import AddIcon from 'react-icons/lib/fa/plus-circle';
@@ -17,11 +19,17 @@ class BookmarksSidebar extends React.Component {
 
     return (
       <div>
-        <StyledTitle><BookmarkIcon /> Bookmarks</StyledTitle>
+
+        <SidebarHeading>Bookmarks</SidebarHeading>
         {bookmarks.map((bookmark, i) => (
-          <StyledCell key={i} onClick={() => setActiveBookmark(i)}>
+          <SidebarCell 
+            key={i} 
+            onClick={() => setActiveBookmark(i)}
+            draggable
+            menu
+            >
             {`${capitalize(bookmark.book)} ${bookmark.chapter + 1}`}
-          </StyledCell>
+          </SidebarCell>
         ))}
 
         <StyledAction onClick={addBookmark}>

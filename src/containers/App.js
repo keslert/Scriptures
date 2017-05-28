@@ -2,12 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+
+
 import PageView from '../components/page-view'
 import VerseView from '../components/verse-view'
 import Toolbar from '../components/toolbar';
 import Sidebar from '../components/sidebar';
 import { getReadingMode, uiActions } from '../core/ui';
-import { StyledCentered } from '../components/common/styled-base';
+import { StyledCentered, StyledFlex } from '../components/common/styled-base';
+
 
 import { getActive } from '../core/ui';
 import { fetchBook, getActiveChapter, getActivePage, getActiveVerse } from '../core/scriptures';
@@ -19,11 +22,12 @@ import $ from 'jquery';
 
 const StyledApp = styled.div`
   display: flex;
-  flex-direction: column;
   height: 100vh;
 `;
 
 const StyledReadingView = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 1;
   overflow: auto;
 `;
@@ -31,7 +35,6 @@ const StyledReadingView = styled.div`
 class App extends React.Component {
 
   componentDidMount() {
-    this.fetchBook();
     const { 
       previous, 
       previousChapter, 
@@ -67,14 +70,10 @@ class App extends React.Component {
   }
 
   componentDidUpdate(oldProps) {
-    if(this.props.active.book !== oldProps.active.book) {
-      this.fetchBook();
+    const { active, fetchBook } = this.props;
+    if(active.book !== oldProps.active.book) {
+      fetchBook(active.work, active.book);
     }
-  }
-
-  fetchBook() {
-    const { active } = this.props;
-    this.props.fetchBook(active.work, active.book);
   }
 
   renderReadingView() {
@@ -93,10 +92,13 @@ class App extends React.Component {
     return (
       <StyledApp>
         <StyledReadingView>
-          {this.renderReadingView()}
+          <StyledFlex>
+            {this.renderReadingView()}
+          </StyledFlex>
+          <Toolbar chapter={chapter} />
         </StyledReadingView>
-        <Toolbar chapter={chapter} />
         <Sidebar />
+        
       </StyledApp>
     );
   }

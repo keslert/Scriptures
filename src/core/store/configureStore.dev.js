@@ -6,6 +6,8 @@ import immutableTransform from 'redux-persist-transform-immutable';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import { ScripturesState } from '../scriptures/reducer';
 import { UiState } from '../ui/reducer';
+import { getActive } from '../ui';
+import { fetchBook } from '../scriptures';
 
 export default function configureStore(initialState) {
   const store = createStore(
@@ -26,6 +28,9 @@ export default function configureStore(initialState) {
         whitelist: ['scriptures', 'ui']
       })
     ]
+  }, () => {
+    const active = getActive(store.getState());
+    store.dispatch(fetchBook(active.work, active.book));
   });
 
   return store;
