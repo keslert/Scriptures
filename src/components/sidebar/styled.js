@@ -1,16 +1,16 @@
 import styled from 'styled-components';
-import theme from '../../styles/theme';
 
 export const StyledSidebar = styled.div`
-  position: relative;
-  width: 0px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 220px;
   height: 100%;
   background: #f5f5f5;
   border-left: 1px solid #f1f1f1;
-  transition: width 0.3s;
+  transition: transform 0.3s ease-out;
   ${props => `
-    ${props.open && 'width: 220px;'};
-    // transform: translate3d(${props.open ? 0 : 220}px, 0, 0);
+    transform: translate3d(${props.open ? 0 : 220}px, 0, 0);
   `};
 `
 

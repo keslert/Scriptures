@@ -12,8 +12,9 @@ import { getReadingMode, uiActions } from '../core/ui';
 import { StyledCentered, StyledFlex } from '../components/common/styled-base';
 
 
-import { getActive } from '../core/ui';
+import { getActive, onMousedDownWord } from '../core/ui';
 import { fetchBook, getActiveChapter, getActivePage, getActiveVerse } from '../core/scriptures';
+import { getSidebarType } from '../core/sidebar';
 
 import { capitalize } from '../core/utils';
 
@@ -21,15 +22,16 @@ import Spinner from 'react-spinkit';
 import $ from 'jquery';
 
 const StyledApp = styled.div`
-  display: flex;
+  // display: flex;
   height: 100vh;
 `;
 
 const StyledReadingView = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
   overflow: auto;
+  height: 100%;
+  width: ${props => props.sidebarOpen ? 'calc(100% - 220px)' : '100%'};
 `;
 
 class App extends React.Component {
@@ -41,6 +43,7 @@ class App extends React.Component {
       advance, 
       advanceChapter, 
       onMouseUp, 
+      onMousedDownWord,
     } = this.props;
 
     $(document)
@@ -67,6 +70,11 @@ class App extends React.Component {
     .on('mouseup', () => {
       onMouseUp(null);
     })
+    .on('mousedown', (e) => {
+      if(!e.target.classList.contains('word')) {
+        onMousedDownWord(null);
+      }
+    })
   }
 
   componentDidUpdate(oldProps) {
@@ -88,10 +96,10 @@ class App extends React.Component {
   }
 
   render() {
-    const { chapter } = this.props;
+    const { chapter, sidebarOpen } = this.props;
     return (
       <StyledApp>
-        <StyledReadingView>
+        <StyledReadingView sidebarOpen={sidebarOpen}>
           <StyledFlex>
             {this.renderReadingView()}
           </StyledFlex>
@@ -110,14 +118,16 @@ const mapStateToProps = createSelector(
   getActivePage,
   getActiveVerse,
   getReadingMode,
-  (active, chapter, page, verse, readingMode) => ({
+  getSidebarType,
+  (active, chapter, page, verse, readingMode, sidebarType) => ({
     readingMode,
     active,
     chapter,
     page,
     verse,
+    sidebarOpen: !!sidebarType,
   })
 )
 
-const mapDispatchToProps = Object.assign({fetchBook}, uiActions);
+const mapDispatchToProps = Object.assign({fetchBook, onMousedDownWord}, uiActions);
 export default connect(mapStateToProps, mapDispatchToProps)(App);

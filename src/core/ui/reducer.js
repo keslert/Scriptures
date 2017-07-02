@@ -12,9 +12,9 @@ export const UiState = new Record({
     lastModified: new Date(),
   }],
   activeBookmark: 0,
-  
   hoveredVerse: null,
   mousedDownWord: null,
+  mouseDown: null,
   selectedRange: null,
 }, 'uiState');
 

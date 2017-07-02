@@ -4,10 +4,10 @@ import { createSelector } from 'reselect';
 
 import styled from 'styled-components';
 import theme from '../../../styles/theme';
-import { onMousedDownWord, onHoveredWord, getSelectedRange } from '../../../core/ui';
+import { onMousedDownWord, onHoveredWord, getSelectedRange, getMousedDownWord } from '../../../core/ui';
+import HighlightBar from '../../highlight-bar';
 
 const StyledWord = styled.span`
-  margin-bottom: 1rem;
   position: relative;
   ${props => `
     ${props.selected && `
@@ -23,27 +23,35 @@ const Word = ({
   selectedRange,
   onMousedDownWord,
   onHoveredWord,
+  mousedDownWord,
 }) => {
-
   const isSelected = 
     selectedRange && 
     selectedRange.start.wordIndex <= wordIndex &&
     selectedRange.end.wordIndex >= wordIndex
+
+
+  const showTooltip = isSelected && selectedRange.start.wordIndex === wordIndex && !mousedDownWord
+  
   return (
     <StyledWord 
       selected={isSelected}
       onMouseDown={() => onMousedDownWord({wordIndex, verseIndex})}
       onMouseEnter={() => onHoveredWord({wordIndex, verseIndex})}
+      className="word"
       >
       {text}
+      { showTooltip && <HighlightBar /> }
     </StyledWord>
   )
 }
 
 const mapStateToProps = createSelector(
   getSelectedRange,
-  (selectedRange) => ({
+  getMousedDownWord,
+  (selectedRange, mousedDownWord) => ({
     selectedRange,
+    mousedDownWord,
   })
 )
 

@@ -7,10 +7,7 @@ import { StyledAction } from '../styled';
 
 import SidebarCell from '../sidebar-cell';
 import SidebarHeading from '../sidebar-heading';
-
-import BookmarkIcon from 'react-icons/lib/md/bookmark';
 import AddIcon from 'react-icons/lib/fa/plus-circle';
-
 
 
 class BookmarksSidebar extends React.Component {

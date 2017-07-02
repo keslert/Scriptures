@@ -7,8 +7,6 @@ import { StyledAction } from '../styled';
 
 import SidebarCell from '../sidebar-cell';
 import SidebarHeading from '../sidebar-heading';
-
-import BookmarkIcon from 'react-icons/lib/md/bookmark';
 import AddIcon from 'react-icons/lib/fa/plus-circle';
 
 
@@ -19,8 +17,7 @@ class GuidesSidebar extends React.Component {
 
     return (
       <div>
-
-        <SidebarHeading>Bookmarks</SidebarHeading>
+        <SidebarHeading>Guides</SidebarHeading>
         {bookmarks.map((bookmark, i) => (
           <SidebarCell 
             key={i} 
@@ -33,7 +30,7 @@ class GuidesSidebar extends React.Component {
         ))}
 
         <StyledAction onClick={addBookmark}>
-          <AddIcon /> Add Bookmark
+          <AddIcon /> Add Guide
         </StyledAction>
       </div>
     )
@@ -42,7 +39,6 @@ class GuidesSidebar extends React.Component {
 
 const mapStateToProps = createSelector(
   getBookmarks,
-  // getActiveBookmarkIndex,
   (bookmarks) => ({
     bookmarks,
   })
@@ -50,6 +46,5 @@ const mapStateToProps = createSelector(
 const mapDispatchToProps = {
   setActiveBookmark,
   addBookmark,
-  // deleteBookmark,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(GuidesSidebar);

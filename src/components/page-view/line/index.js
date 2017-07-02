@@ -4,6 +4,7 @@ import Word from '../word';
 
 const StyledLine = styled.div`
   display: flex;
+  margin-bottom: 0.8em;
 `
 
 const StyledNumber = styled.span`

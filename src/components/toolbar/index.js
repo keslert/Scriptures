@@ -12,7 +12,7 @@ const StyledToolbar = styled.div`
   align-items: center;
   justify-content: center;
   background: #fff;
-  padding: 10px 20px;
+  padding: 5px 20px;
   box-sizing: border-box;
 `
 

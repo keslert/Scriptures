@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import theme from '../../styles/theme';
 import CloseIcon from 'react-icons/lib/md/close';
 import { hideSidebar } from '../../core/sidebar';
 

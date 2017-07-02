@@ -11,7 +11,7 @@ export function parseBook(rawJson) {
 }
 
 function parseChapter(chapter) {  
-  const linesPerColumn = 22;
+  const linesPerColumn = 24;
   const columnsPerPage = 2;
 
   const allLines = flatten(chapter.verses.map((verse, i) => {

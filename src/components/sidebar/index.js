@@ -6,24 +6,25 @@ import { StyledSidebar } from './styled';
 import { getSidebarType, showSidebar } from '../../core/sidebar'
 
 import BookmarksSidebar from './bookmarks-sidebar';
+import GuidesSidebar from './guides-sidebar';
 
 import * as types from '../../core/sidebar/sidebar-types';
 import { map, values } from 'lodash';
 
 const StyledMenu = styled.div`
   position: fixed;
-  bottom: 14px;
+  bottom: 4px;
   right: 25px;
   font-weight: bold;
-  ${props => `
-    ${props.hidden && 'opacity: 0'};
+  &:not(:hover) .item {
+    bottom: 0;
+  }
+  &:hover .item {
+    opacity: 1;
+  }
 
-    .item {
-      transition: all 0.3s ease-out;
-      ${!props.expanded && 'bottom: 0;'};
-      opacity: ${props.expanded ? 1 : 0};
-    }
-    
+  ${props => `
+    ${props.hidden && 'opacity: 0'};    
   `}
 `
 
@@ -32,6 +33,16 @@ const StyledMenuItem = styled.div`
   right: 0;
   bottom: ${props => props.bottom}px;
   cursor: pointer;
+  transition: all 0.3s ease-out;
+  padding: 10px 0;
+  width: 100px;
+  text-align: right;
+  &.item {
+    opacity: 0;
+  }
+  &:hover {
+    color: #575757;
+  }
 `;
 
 
@@ -44,7 +55,7 @@ const sidebars = {
   [types.GUIDES_SIDEBAR]: {
     key: types.GUIDES_SIDEBAR,
     label: 'Guides',
-    component: BookmarksSidebar,
+    component: GuidesSidebar,
   },
   [types.CHAINS_SIDEBAR]: {
     key: types.CHAINS_SIDEBAR,
@@ -55,19 +66,7 @@ const sidebars = {
 
 class Sidebar extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
-      menuExpanded: false,
-    };
-  }
-
-  toggleMenu() {
-    this.setState({menuExpanded: !this.state.menuExpanded})
-  }
-
   render() {
-    const { menuExpanded } = this.state;
     const { sidebarType, showSidebar } = this.props;
     const sidebar = sidebars[sidebarType]
 
@@ -78,22 +77,17 @@ class Sidebar extends React.Component {
           {open && <sidebar.component />}
         </StyledSidebar>
 
-        <StyledMenu hidden={open} expanded={menuExpanded}>
+        <StyledMenu hidden={open}>
           {map(values(sidebars), (sidebar, i) => (
             <StyledMenuItem 
               key={i}
               className="item" 
               bottom={(i + 1) * 30} 
-              onClick={() => { 
-                if(menuExpanded) {
-                  showSidebar(sidebar.key); 
-                  this.toggleMenu();
-                }
-              }}>
+              onClick={() => showSidebar(sidebar.key)}>
               {sidebar.label}
             </StyledMenuItem>
           ))}
-          <StyledMenuItem bottom={0} onClick={() => this.toggleMenu()}>
+          <StyledMenuItem bottom={0}>
             Menu
           </StyledMenuItem>
         </StyledMenu>

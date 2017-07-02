@@ -7,7 +7,7 @@ const StyledColumn = styled.div`
   flex-direction: column;
   justify-content: ${props => props.justify};
   margin: 1em 2em;
-  height: 40em;
+  height: 38em;
 `
 
 const Column = ({
