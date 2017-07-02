@@ -27,6 +27,9 @@ export default function configureStore(initialState) {
         whitelist: ['scriptures', 'ui']
       })
     ]
+  }, () => {
+    const active = getActive(store.getState());
+    store.dispatch(fetchBook(active.work, active.book));
   });
 
   return store;
