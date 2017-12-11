@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { setActiveBookmark, addBookmark, getBookmarks } from '../../../core/ui';
+import { getBookmarksList, addBookmark, setActiveBookmark } from '../../../core/bookmarks';
 import { capitalize } from '../../../core/utils';
 import { StyledAction } from '../styled';
 
@@ -38,8 +38,7 @@ class BookmarksSidebar extends React.Component {
 }
 
 const mapStateToProps = createSelector(
-  getBookmarks,
-  // getActiveBookmarkIndex,
+  getBookmarksList,
   (bookmarks) => ({
     bookmarks,
   })

@@ -1,36 +1,50 @@
 import React from 'react';
-import styled from 'styled-components';
-import Logo from '../common/logo'
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import { Flex, Box } from 'rebass';
 
-import { StyledAbsolute } from '../common/styled-base';
+import { getActiveBookmark } from '../../core/bookmarks'
+import { getActiveChapter } from '../../core/scriptures'
+import { getReadingMode } from '../../core/ui'
 
 import ChapterSummary from '../chapter-summary';
 
-const StyledToolbar = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-  padding: 5px 20px;
-  box-sizing: border-box;
-`
 
-const Toolbar = ({
-  chapter
-}) => {
-  return (
-    <StyledToolbar>
-      <StyledAbsolute left="20px" bottom="15px">
-        <Logo />
-      </StyledAbsolute>
-      
-      {chapter && <ChapterSummary {...chapter} />}
-      
-      <StyledAbsolute right="20px" bottom="15px">
-        
-      </StyledAbsolute>
-    </StyledToolbar>
-  )
+class Toolbar extends React.Component {
+
+  render() {
+
+    const { chapter, bookmark, readingMode } = this.props;
+    console.log(chapter)
+    if(!chapter)
+      return null
+
+    return (
+      <Flex>
+        <Box flex={1}>
+          <div className="IconBar" />
+        </Box>
+        <div className="ChapterSelection" />
+        <Box flex={1}>
+          <ChapterSummary 
+            chapter={chapter}
+            bookmark={bookmark}
+            readingMode={readingMode}
+            />
+        </Box>
+      </Flex>
+    )
+  }
 }
-export default Toolbar;
+
+const mapStateToProps = createSelector(
+  getActiveBookmark,
+  getActiveChapter,
+  getReadingMode,
+  (bookmark, chapter, readingMode) => ({
+    bookmark,
+    chapter,
+    readingMode,
+  })
+)
+export default connect(mapStateToProps)(Toolbar);

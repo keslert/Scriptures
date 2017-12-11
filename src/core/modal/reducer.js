@@ -1,11 +1,11 @@
 import * as types from './action-types';
 
-const ModalState = () => ({
+const modalState = () => ({
   modalType: null,
   modalProps: {}
 })
 
-export function modalReducer(state = ModalState(), action) {
+export function modalReducer(state = modalState(), action) {
   switch (action.type) {
     case types.SHOW_MODAL:
       return Object.assign({}, state, {
@@ -13,7 +13,7 @@ export function modalReducer(state = ModalState(), action) {
         modalProps: action.modalProps
       });
     case types.HIDE_MODAL:
-      return ModalState();
+      return modalState();
     default:
       return state
   }

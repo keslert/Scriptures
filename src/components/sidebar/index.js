@@ -6,7 +6,6 @@ import { StyledSidebar } from './styled';
 import { getSidebarType, showSidebar } from '../../core/sidebar'
 
 import BookmarksSidebar from './bookmarks-sidebar';
-import GuidesSidebar from './guides-sidebar';
 
 import * as types from '../../core/sidebar/sidebar-types';
 import { map, values } from 'lodash';
@@ -51,11 +50,6 @@ const sidebars = {
     key: types.BOOKMARKS_SIDEBAR,
     label: 'Bookmarks',
     component: BookmarksSidebar,
-  },
-  [types.GUIDES_SIDEBAR]: {
-    key: types.GUIDES_SIDEBAR,
-    label: 'Guides',
-    component: GuidesSidebar,
   },
   [types.CHAINS_SIDEBAR]: {
     key: types.CHAINS_SIDEBAR,

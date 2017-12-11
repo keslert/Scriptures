@@ -90,18 +90,23 @@ const newTestament = [
   {name: 'revelation', chapters: 22},
 ]
 
-export const scriptures = [
+export const works = [
   {name: 'book-of-mormon', books: bookOfMormon},
   {name: 'old-testament', books: oldTestament},
   {name: 'new-testament', books: newTestament},
 ]
 
-export function getNextBook(name) {
-  const index = findIndex(bookOfMormon, book => book.name === name);
+export function getNextBook(work, name) {
+  const index = findIndex(works[work], book => book.name === name);
   return bookOfMormon[index + 1];
 }
 
-export function getPreviousBook(name) {
-  const index = findIndex(bookOfMormon, book => book.name === name);
+export function getPreviousBook(work, name) {
+  const index = findIndex(works[work], book => book.name === name);
   return bookOfMormon[index - 1];
+}
+
+export function getBookSummary(work, name) {
+  const book = works[work][name];
+  return book;
 }

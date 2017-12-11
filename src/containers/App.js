@@ -8,12 +8,13 @@ import PageView from '../components/page-view'
 import VerseView from '../components/verse-view'
 import Toolbar from '../components/toolbar';
 import Sidebar from '../components/sidebar';
+import { getActiveBookmark } from '../core/bookmarks';
 import { getReadingMode, uiActions } from '../core/ui';
-import { StyledCentered, StyledFlex } from '../components/common/styled-base';
+import { Flex, Box } from 'rebass';
 
 
 import { getActive, onMousedDownWord } from '../core/ui';
-import { fetchBook, getActiveChapter, getActivePage, getActiveVerse } from '../core/scriptures';
+import { fetchBook } from '../core/scriptures';
 import { getSidebarType } from '../core/sidebar';
 
 import { capitalize } from '../core/utils';
@@ -21,18 +22,6 @@ import { capitalize } from '../core/utils';
 import Spinner from 'react-spinkit';
 import $ from 'jquery';
 
-const StyledApp = styled.div`
-  // display: flex;
-  height: 100vh;
-`;
-
-const StyledReadingView = styled.div`
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-  height: 100%;
-  width: ${props => props.sidebarOpen ? 'calc(100% - 220px)' : '100%'};
-`;
 
 class App extends React.Component {
 
@@ -87,7 +76,11 @@ class App extends React.Component {
   renderReadingView() {
     const { active, page, verse, readingMode } = this.props;
     if(!page) {
-      return <StyledCentered><Spinner spinnerName='wave' /></StyledCentered>
+      return (
+        <Flex justify="center" align="center">
+          <Spinner name='line-scale' color="#cdc1a4" />
+        </Flex>
+      )
     }
 
     return readingMode === 'page'
@@ -97,34 +90,36 @@ class App extends React.Component {
 
   render() {
     const { chapter, sidebarOpen } = this.props;
+
+    const sidebarWidth = sidebarOpen ? 220 : 0;
     return (
-      <StyledApp>
-        <StyledReadingView sidebarOpen={sidebarOpen}>
-          <StyledFlex>
+      <Box>
+        <Flex 
+          w={`calc(100% - ${sidebarWidth}px`}
+          direction="column" 
+          style={{overflowY: 'auto', height: '100vh'}}
+          >
+          <Toolbar />
+          <Flex flex={1}>
             {this.renderReadingView()}
-          </StyledFlex>
-          <Toolbar chapter={chapter} />
-        </StyledReadingView>
-        <Sidebar />
+          </Flex>
+          
+        </Flex>
         
-      </StyledApp>
+        <Sidebar open={sidebarOpen} />
+        
+      </Box>
     );
   }
 }
 
 const mapStateToProps = createSelector(
-  getActive,
-  getActiveChapter,
-  getActivePage,
-  getActiveVerse,
+  getActiveBookmark,
   getReadingMode,
   getSidebarType,
-  (active, chapter, page, verse, readingMode, sidebarType) => ({
+  (bookmark, readingMode, sidebarType) => ({
+    bookmark,
     readingMode,
-    active,
-    chapter,
-    page,
-    verse,
     sidebarOpen: !!sidebarType,
   })
 )

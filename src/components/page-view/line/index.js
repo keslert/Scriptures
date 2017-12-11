@@ -1,21 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 import Word from '../word';
+import theme from '../../../styles/theme';
 
 const StyledLine = styled.div`
   display: flex;
   margin-bottom: 0.8em;
+  align-items: baseline;
 `
 
 const StyledNumber = styled.span`
-  margin: 0 0.5em;
+  margin-right: 0.5em;
+  color: ${theme.secondary};
+  font-size: 0.8em;
 `
 
 const StyledWords = styled.span`
   display: flex;
   justify-content: ${props => props.justify};
   flex: 1;
-  :not(:last-child) {
+  > span:not(:last-child) {
     margin-right: 0.2em;
   }
 `

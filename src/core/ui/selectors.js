@@ -1,4 +1,5 @@
-import { createSelector } from 'reselect';
+import { createSelector } from 'reselect'
+import { getActiveBookmark } from '../bookmarks'
 
 export function getUI(state) {
   return state.ui;
@@ -7,17 +8,6 @@ export function getUI(state) {
 export function getReadingMode(state) {
   return getUI(state).readingMode;
 }
-
-export function getBookmarks(state) {
-  return getUI(state).bookmarks;
-}
-
-export function getActive(state) {
-  const ui = getUI(state);
-  return ui.bookmarks[ui.activeBookmark];
-}
-
-
 
 export function getHoveredVerse(state) {
   return getUI(state).hoveredVerse;
@@ -40,11 +30,11 @@ export function isVerseHovered(state, props) {
 }
 
 export function isVerseActive(state, props) {
-  return getActive(state).verse === Number.parseInt(props.verse, 10);
+  return getActiveBookmark(state).verse === Number.parseInt(props.verse, 10);
 }
 
 export function isPageActive(state, props) {
-  return getActive(state).page === Number.parseInt(props.pageIndex, 10);
+  return getActiveBookmark(state).page === Number.parseInt(props.pageIndex, 10);
 }
 
 export const getSelectedRange = createSelector(

@@ -1,17 +1,17 @@
 import * as types from './action-types';
 
-const SidebarState = () => ({
+const sidebarState = () => ({
   sidebarType: null,
 })
 
-export function sidebarReducer(state = SidebarState(), action) {
+export function sidebarReducer(state = sidebarState(), action) {
   switch (action.type) {
     case types.SHOW_SIDEBAR:
       return Object.assign({}, state, {
         sidebarType: action.sidebarType,
       });
     case types.HIDE_SIDEBAR:
-      return SidebarState();
+      return sidebarState();
     default:
       return state
   }
