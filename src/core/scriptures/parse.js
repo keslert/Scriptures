@@ -10,10 +10,10 @@ export function parseBook(rawJson) {
   }
 }
 
+const LINES_PER_COLUMN = 24;
+const COLUMNS_PER_PAGE = 2;
 function parseChapter(chapter) {  
-  const linesPerColumn = 24;
-  const columnsPerPage = 2;
-
+  
   const allLines = flatten(chapter.verses.map((verse, i) => {
     return breakVerseIntoLines(verse.text, i).map(line => ({
       ...line,
@@ -25,20 +25,22 @@ function parseChapter(chapter) {
   allLines.forEach(line => line.words.forEach(word => word.wordIndex = wordIndex++));
 
 
-  const _columns = chunk(allLines, linesPerColumn);
+  const _columns = chunk(allLines, LINES_PER_COLUMN);
 
   const columns = _columns.map((column, i) => ({
     verses: map(groupBy(column, line => line.verse), (verse, verseIndex) => ({
       verseIndex,
       lines: verse,
+      isVerse: true,
     })),
     columnIndex: i,
     isLast: i === _columns.length - 1,
   }));
 
-  const pages = chunk(columns, columnsPerPage).map((page, i) => ({
+  const pages = chunk(columns, COLUMNS_PER_PAGE).map((page, i) => ({
     columns: page,
     pageIndex: i,
+    isPage: true,
   }));
 
   return {
@@ -51,14 +53,12 @@ function parseChapter(chapter) {
   }
 }
 
+const CHARACTERS_PER_LINE = 50;
 function breakVerseIntoLines(text, verseIndex) {
-  const maxLength = 50;
   const words = text.split(' ');
-
-  
   const concatenatedWords = words.reduce((result, word) => {
     const newLine = result[result.length - 1] + ' ' + word;
-    if(newLine.length > maxLength) {
+    if(newLine.length > CHARACTERS_PER_LINE) {
       result.push(word);
     } else {
       result[result.length - 1] = newLine;
@@ -71,9 +71,6 @@ function breakVerseIntoLines(text, verseIndex) {
     isFirst: i === 0,
     isLast: i === concatenatedWords.length - 1,
   }));
-
-  // let wordIndex = 0;
-  // lines.forEach(line => line.words.forEach(word => word.wordIndex = wordIndex++));
 
   return lines;
 }

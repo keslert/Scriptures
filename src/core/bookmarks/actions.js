@@ -1,7 +1,7 @@
 import * as types from './action-types';
 import { getReadingMode } from '../ui';
 import { getActiveBookmark } from './selectors';
-import { getActiveChapter } from '../scriptures';
+import { getActiveChapter, getActiveBook } from '../scriptures';
 
 import { 
   getNextBook, 
@@ -80,7 +80,7 @@ export function advanceChapter() {
   return (dispatch, getState) => {
     const state = getState();
     const bookmark = getActiveBookmark(state);
-    const book = getBookSummary(bookmark.work, bookmark.book);
+    const book = getActiveBook(state);
 
     if(bookmark.chapter < book.chapters.length - 1) {
       dispatch(updateBookmark({...bookmark,
@@ -106,7 +106,7 @@ export function previousChapter(startAtEnd) {
   return (dispatch, getState) => {
     const state = getState();
     const bookmark = getActiveBookmark(state);
-    const book = getBookSummary(bookmark.work, bookmark.book);
+    const book = getActiveBook(state);
 
     if(bookmark.chapter > 0) {
       const chapter = book.chapters[bookmark.chapter - 1];
@@ -121,8 +121,8 @@ export function previousChapter(startAtEnd) {
         dispatch(updateBookmark({...bookmark,
           book: prevBook.name,
           chapter: prevBook.chapters - 1,
-          page: 0,
-          verse: 0,
+          page: 0, // TODO: We should try to set the page correctly...
+          verse: 0, 
         }))
       }
     }

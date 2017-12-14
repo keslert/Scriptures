@@ -1,5 +1,3 @@
-import theme from '../../styles/theme';
-
 export const defaultStyles = {
   overlay : {
     position: 'fixed',

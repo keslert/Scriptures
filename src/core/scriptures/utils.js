@@ -1,4 +1,4 @@
-import { findIndex } from 'lodash';
+import { findIndex, find } from 'lodash';
 
 const bookOfMormon = [
   {name: '1-nephi', chapters: 22 },
@@ -90,23 +90,23 @@ const newTestament = [
   {name: 'revelation', chapters: 22},
 ]
 
-export const works = [
-  {name: 'book-of-mormon', books: bookOfMormon},
-  {name: 'old-testament', books: oldTestament},
-  {name: 'new-testament', books: newTestament},
-]
+export const works = {
+  'book-of-mormon': bookOfMormon,
+  'old-testament': oldTestament,
+  'new-testament': newTestament,
+}
 
 export function getNextBook(work, name) {
   const index = findIndex(works[work], book => book.name === name);
-  return bookOfMormon[index + 1];
+  return works[work][index + 1];
 }
 
 export function getPreviousBook(work, name) {
   const index = findIndex(works[work], book => book.name === name);
-  return bookOfMormon[index - 1];
+  return works[work][index - 1];
 }
 
 export function getBookSummary(work, name) {
-  const book = works[work][name];
-  return book;
+  const index = findIndex(works[work], book => book.name === name);
+  return works[work][index];
 }

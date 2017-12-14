@@ -1,9 +1,19 @@
 import * as types from './action-types';
+import { getReadingMode } from './selectors'
 
 export function setReadingMode(mode) {
-  return {
-    type: types.SET_READING_MODE,
-    payload: mode,
+  return (dispatch, getState) => {
+    const currentMode = getReadingMode(getState());
+    if(currentMode === 'verse' && mode === 'page') {
+      // 
+    } else if(currentMode === 'page' && mode === 'verse') {
+      //
+    }
+
+    dispatch({
+      type: types.SET_READING_MODE,
+      payload: mode,
+    })
   }
 }
 

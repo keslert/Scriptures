@@ -4,22 +4,21 @@ import { Box, Flex } from 'rebass';
 
 class ChapterSummary extends React.PureComponent {
 
-  handleClick = () => {
-
-  }
-
   render() {
-    const { bookmark, readingMode, chapter } = this.props;
+    const { bookmark, readingMode, chapter, onClick } = this.props;
+
+    if(!chapter)
+      return null;
 
     return (
-      <Flex>
+      <Flex direction="row">
         {chapter.pages.map((page, i) =>
           <Page
             key={i}
             page={page}
             bookmark={bookmark}
             readingMode={readingMode} 
-            onClick={this.handleClick}
+            onClick={onClick}
             />
         )}
       </Flex>

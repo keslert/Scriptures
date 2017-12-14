@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import { theme } from '../../styles/theme';
 import tinycolor from 'tinycolor2';
 
 export const _Button = styled.a`
-  background: ${theme.color.primary};
+  background: ${props => props.theme.colors.primary};
   color: #fff;
   text-align: center;
   border-radius: 2px;

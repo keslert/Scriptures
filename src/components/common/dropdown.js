@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import { theme } from '../../styles/theme';
 
 const _Cover = styled.div`
   position: fixed;
@@ -22,7 +21,7 @@ const _Relative = styled.div`
 `;
 
 const _Menu = styled.div`
-  background: ${theme.color.dark_shade};
+  background: ${props => props.theme.colors.dark_shade};
   box-shadow: 0 2px 3px rgba(0,0,0,0.5);
   font-size: 13px;
   font-weight: normal;
@@ -33,7 +32,7 @@ const _Menu = styled.div`
 
 const _MenuItem = styled.div`
   padding: 8px 16px;
-  color: ${theme.color.white};
+  color: ${props => props.theme.colors.white};
   white-space: nowrap;
   cursor: pointer;
   &:not(:last-child) {

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import theme from '../../styles/theme';
 const _ModalBody = styled.div`
   flex: 1;
   display: flex;
@@ -13,7 +12,7 @@ const _ModalBody = styled.div`
 
 const _Icon = styled.div`
   font-size: 70px;
-  color: ${theme.primary};
+  color: ${props => props.theme.colors.primary};
 `
 
 const ModalBody = ({

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import styled from 'styled-components';
-import theme from '../../../styles/theme';
 import { onMousedDownWord, onHoveredWord, getSelectedRange, getMousedDownWord } from '../../../core/ui';
 import HighlightBar from '../../highlight-bar';
 
@@ -11,7 +10,7 @@ const StyledWord = styled.span`
   position: relative;
   ${props => `
     ${props.selected && `
-      color: ${theme.secondary};
+      color: ${props.theme.colors.secondary};
     `};
   `};
 `;

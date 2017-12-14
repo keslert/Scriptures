@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Verse from '../page-view/verse';
-import theme from '../../styles/theme';
 import { FadeIn } from '../common/styled-animations';
 
 const StyledVerseView = styled.div`
@@ -17,7 +16,7 @@ const StyledVerseView = styled.div`
 
 const StyledTitle = styled.div`
   margin-top: 1em;
-  color: ${theme.secondary};
+  color: ${props => props.theme.colors.secondary};
   font-size: 0.9em;
   font-family: 'Lusitana';
 `

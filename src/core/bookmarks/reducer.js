@@ -3,7 +3,7 @@ import * as types from './action-types';
 const bookmarkState = () => ({
   work: 'book-of-mormon',
   book: '1-nephi',
-  chapter: 0,
+  chapter: 21,
   verse: 0,
   page: 0,
   lastModified: new Date(),

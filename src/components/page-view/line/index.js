@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Word from '../word';
-import theme from '../../../styles/theme';
 
 const StyledLine = styled.div`
   display: flex;
@@ -11,7 +10,7 @@ const StyledLine = styled.div`
 
 const StyledNumber = styled.span`
   margin-right: 0.5em;
-  color: ${theme.secondary};
+  color: ${props => props.theme.colors.secondary};
   font-size: 0.8em;
 `
 

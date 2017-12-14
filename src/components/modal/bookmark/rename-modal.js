@@ -9,7 +9,6 @@ import { defaultStyles } from '../modal-styles';
 
 import Icon from 'react-icons/lib/md/content-cut';
 import { _Button } from '../../common/styled-buttons';
-import theme from '../../../styles/theme';
 
 
 class BookmarkRenameModal extends React.Component {

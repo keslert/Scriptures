@@ -24,9 +24,9 @@ const StyledVerse = styled.div`
   margin-bottom: 2px;
   ${props => `
     height: ${props.height};
-    background: ${props.theme[props.isActive ? 'secondaryLight' : 'offLight']};
+    background: ${props.theme.colors[props.isActive ? 'secondaryLight' : 'offLight']};
     &:hover {
-      background: ${props.theme.secondaryLight}
+      background: ${props.theme.colors.secondaryLight}
     }
   `}
 `
