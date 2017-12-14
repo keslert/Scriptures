@@ -18,6 +18,7 @@ class Page extends React.PureComponent {
           <Column
             key={i}
             column={column}
+            readingMode={readingMode}
             bookmark={bookmark}
             onClick={onClick}
             />

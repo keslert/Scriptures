@@ -6,10 +6,11 @@ import { Flex, Box } from 'rebass';
 import { works } from '../core/scriptures/utils';
 import { getActiveBookmark, updateBookmark } from '../core/bookmarks'
 import { getActiveChapter } from '../core/scriptures'
-import { getReadingMode } from '../core/ui'
+import { getReadingMode, setReadingMode } from '../core/ui'
 
 import ChapterSummary from '../components/chapter-summary'
 import WorksSelector from '../components/works-selector'
+import ReadingModeSelector from '../components/reading-mode-selector'
 
 import theme from '../styles/rebass-theme'
 
@@ -24,8 +25,12 @@ class Toolbar extends React.Component {
     if(item.isPage) {
       this.props.updateBookmark({page: item.pageIndex})
     } else {
-      this.props.updateBookmark({verse: item.pageIndex})
+      this.props.updateBookmark({verse: item.verseIndex})
     }
+  }
+
+  handleReadingModeClick = (mode) => {
+    this.props.setReadingMode(mode);
   }
 
   render() {
@@ -47,7 +52,11 @@ class Toolbar extends React.Component {
             onChange={this.handleWorksChange}
             />
         </Box>
-        <Flex flex={1} justify="flex-end">
+        <Flex flex={1} justify="flex-end" align="center">
+          <ReadingModeSelector
+            readingMode={readingMode}
+            onClick={this.handleReadingModeClick}
+            />
           <ChapterSummary 
             chapter={chapter}
             bookmark={bookmark}
@@ -73,5 +82,6 @@ const mapStateToProps = createSelector(
 
 const mapDispatchToProps = {
   updateBookmark,
+  setReadingMode,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);

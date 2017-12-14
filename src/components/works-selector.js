@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
+import Cascader from 'rc-cascader'
+import _ from 'lodash'
+import styled from 'styled-components'
 
-import Cascader from 'rc-cascader';
-import _ from 'lodash';
-
-import { capitalize } from '../core/utils';
-import { Box, Flex, Text, Subhead } from 'rebass';
+import { capitalize } from '../core/utils'
+import { Box, Flex, Text, Subhead } from 'rebass'
 
 class WorksSelector extends React.PureComponent {
 
@@ -38,21 +38,26 @@ class WorksSelector extends React.PureComponent {
         options={options} 
         dropdownMenuColumnStyle={{width: 140}} 
         onChange={this.handleChange}
+        expandTrigger="hover"
         >
-        <Flex align="center" style={{outline: 'none'}}>
-          <Box>
-            <Subhead f={3}>{capitalize(bookmark.book)} {bookmark.chapter + 1}</Subhead>
-            <Text align="center" color="gold" f={1}>
-              {chapter && chapter.verses.length} Verses
-            </Text>
-          </Box>
-          <Box ml={2}>
-            <Text f="10px">▼</Text>
-          </Box>
-        </Flex>
+        <SWrap align="center" justify="center" direction="column" p={2}>
+          <Subhead f={3}>{capitalize(bookmark.book)} {bookmark.chapter + 1}</Subhead>
+          <Text align="center" color="gold" f={1}>
+            {chapter && chapter.verses.length} Verses
+          </Text>
+        </SWrap>
       </Cascader>
     )
   }
 }
 
 export default WorksSelector;
+
+const SWrap = styled(Flex)`
+  height: 65px;
+  outline: none;
+  cursor: pointer;
+  &:hover {
+    background: rgba(0,0,0,0.05);
+  }
+`

@@ -29,7 +29,7 @@ function parseChapter(chapter) {
 
   const columns = _columns.map((column, i) => ({
     verses: map(groupBy(column, line => line.verse), (verse, verseIndex) => ({
-      verseIndex,
+      verseIndex: Number.parseInt(verseIndex),
       lines: verse,
       isVerse: true,
     })),

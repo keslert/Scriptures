@@ -13,6 +13,7 @@ class Column extends React.PureComponent {
           <Verse 
             key={i}
             verse={verse}
+            readingMode={readingMode}
             bookmark={bookmark}
             onClick={onClick}
             />
