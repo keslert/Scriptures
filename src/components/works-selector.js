@@ -42,7 +42,7 @@ class WorksSelector extends React.PureComponent {
         >
         <SWrap align="center" justify="center" direction="column" p={2}>
           <Subhead f={3}>{capitalize(bookmark.book)} {bookmark.chapter + 1}</Subhead>
-          <Text align="center" color="gold" f={1}>
+          <Text align="center" color="secondaryDark" f={1}>
             {chapter && chapter.verses.length} Verses
           </Text>
         </SWrap>

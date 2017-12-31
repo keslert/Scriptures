@@ -1,17 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Word from '../word';
-
-const StyledLine = styled.div`
-  display: flex;
-  margin-bottom: 0.8em;
-  align-items: baseline;
-`
+import { Flex } from 'rebass'
 
 const StyledNumber = styled.span`
   margin-right: 0.5em;
-  color: ${props => props.theme.colors.secondary};
-  font-size: 0.8em;
+  color: ${props => props.theme.colors.secondaryDark};
+  font-size: 0.9em;
+  font-family: ${props => props.theme.font};
 `
 
 const StyledWords = styled.span`
@@ -29,11 +25,11 @@ const Line = ({
   isLast,
   words,
 }) => (
-  <StyledLine>
+  <Flex mb=".7em" align="baseline">
     {isFirst ? <StyledNumber>{verse + 1}</StyledNumber> : null}
     <StyledWords justify={isLast ? 'flex-start' : 'space-between'}>
       {words.map((word, i) => <Word key={i} {...word} />)}
     </StyledWords>
-  </StyledLine>
+  </Flex>
 )
 export default Line;

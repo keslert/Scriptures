@@ -2,7 +2,7 @@ import React from 'react';
 import Page from './page';
 import { Box, Flex } from 'rebass';
 
-class ChapterSummary extends React.PureComponent {
+class ChapterSummary extends React.Component {
 
   render() {
     const { bookmark, readingMode, chapter, onClick } = this.props;

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as Redux } from 'react-redux';
-import { ThemeProvider } from 'styled-components'
 import { Provider as Rebass } from 'rebass'
 import theme from './styles/rebass-theme'
 import configureStore from './core/store/configureStore'; 

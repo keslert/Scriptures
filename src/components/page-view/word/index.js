@@ -35,8 +35,8 @@ const Word = ({
   return (
     <StyledWord 
       selected={isSelected}
-      onMouseDown={() => onMousedDownWord({wordIndex, verseIndex})}
-      onMouseEnter={() => onHoveredWord({wordIndex, verseIndex})}
+      // onMouseDown={() => onMousedDownWord({wordIndex, verseIndex})}
+      // onMouseEnter={() => onHoveredWord({wordIndex, verseIndex})}
       className="word"
       >
       {text}

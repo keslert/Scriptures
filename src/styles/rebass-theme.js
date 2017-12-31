@@ -37,6 +37,7 @@ export default {
     secondary: '#cdc1a4',
     secondaryLight: '#e4ddcd',
     secondaryLightest: '#f5f2ed',
+    secondaryDark: '#d1ba85',
     light: '#fff',
     offLight: '#E2E6EA',
     lightGrey: '#E9E7E7',
@@ -48,6 +49,6 @@ export default {
   },
   bg: '#aea',
   radius: 4,
-  font: '"Open Sans Condensed", sans-serif',
+  font: '"Barlow Semi Condensed", sans-serif',
   monospace: '"SF Mono", "Roboto Mono", Menlo, monospace'
 }

@@ -11,6 +11,7 @@ import { getReadingMode, setReadingMode } from '../core/ui'
 import ChapterSummary from '../components/chapter-summary'
 import WorksSelector from '../components/works-selector'
 import ReadingModeSelector from '../components/reading-mode-selector'
+import ScriptureSlider from '../components/scripture-slider'
 
 import theme from '../styles/rebass-theme'
 
@@ -33,37 +34,50 @@ class Toolbar extends React.Component {
     this.props.setReadingMode(mode);
   }
 
+  handleSliderChange = ({book, chapter}) => {
+    this.props.updateBookmark({book, chapter});
+  }
+
   render() {
 
     const { chapter, bookmark, readingMode } = this.props;
 
-    const navStyle = {boxShadow: theme.shadows.basic, height: 65}
+    const navStyle = {boxShadow: theme.shadows.basic}
 
     return (
-      <Flex direction="row" py={1} px={2} align="center" bg="#ffffff" style={navStyle}>
-        <Box flex={1}>
-          <div className="IconBar"></div>
-        </Box>
-        <Box>
-          <WorksSelector
-            works={works}
-            chapter={chapter}
-            bookmark={bookmark}
-            onChange={this.handleWorksChange}
-            />
-        </Box>
-        <Flex flex={1} justify="flex-end" align="center">
-          <ReadingModeSelector
-            readingMode={readingMode}
-            onClick={this.handleReadingModeClick}
-            />
-          <ChapterSummary 
-            chapter={chapter}
-            bookmark={bookmark}
-            readingMode={readingMode}
-            onClick={this.handleSummaryClick}
-            />
+      <Flex direction="column" style={navStyle}>
+        <Flex direction="row" py={1} px={2} align="center" bg="#ffffff">
+          <Box flex={1}>
+            <div className="IconBar"></div>
+          </Box>
+          <Box>
+            <WorksSelector
+              works={works}
+              chapter={chapter}
+              bookmark={bookmark}
+              onChange={this.handleWorksChange}
+              />
+          </Box>
+          <Flex flex={1} justify="flex-end" align="center">
+            <ChapterSummary 
+              chapter={chapter}
+              bookmark={bookmark}
+              readingMode={readingMode}
+              onClick={this.handleSummaryClick}
+              />
+            <ReadingModeSelector
+              readingMode={readingMode}
+              onClick={this.handleReadingModeClick}
+              />
+          </Flex>
         </Flex>
+        <Box my="-7px" pl={1}>
+          <ScriptureSlider
+            works={works}
+            bookmark={bookmark}
+            onChange={this.handleSliderChange}
+            />
+        </Box>
       </Flex>
     )
   }

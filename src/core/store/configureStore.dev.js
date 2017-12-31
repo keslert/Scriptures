@@ -18,7 +18,7 @@ export default function configureStore(initialState) {
   );
   
   persistStore(store, {
-    whitelist: ['scriptures', 'ui'],
+    whitelist: ['scriptures', 'ui', 'bookmarks'],
   }, () => {
     const bookmark = getActiveBookmark(store.getState());
     store.dispatch(fetchBook(bookmark.work, bookmark.book));

@@ -3,6 +3,13 @@ import styled from 'styled-components';
 
 class Verse extends React.PureComponent {
 
+  handleClick = () => {
+    const { verse, readingMode, onClick } = this.props;
+    if(readingMode === 'verse') {
+      onClick(verse)
+    }
+  }
+
   render() {
     const { verse, bookmark, readingMode, onClick } = this.props;
 
@@ -10,7 +17,7 @@ class Verse extends React.PureComponent {
     return (
       <StyledVerse
         isActive={isVerseMode && verse.verseIndex === bookmark.verse}
-        onClick={() => onClick(verse)}
+        onClick={this.handleClick}
         height={`${verse.lines.length / 7}em`} 
         className="verse"
         />

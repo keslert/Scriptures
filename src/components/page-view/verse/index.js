@@ -6,7 +6,7 @@ const StyledVerse = styled.div`
   font-family: 'Lusitana';
   line-height: 0.7em;
   margin-bottom: 0.2em;
-  width: 24em;
+  min-width: 22em;
 `
 
 const Verse = ({

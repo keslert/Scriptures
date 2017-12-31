@@ -4,6 +4,13 @@ import Column from './column';
 
 class Page extends React.PureComponent {
 
+  handleClick = (e) => {
+    const { readingMode, onClick, page } = this.props
+    if(readingMode === 'page') {
+      onClick(page)
+    }
+  }
+
   render() {
     const { bookmark, page, readingMode, onClick } = this.props;
 
@@ -12,7 +19,7 @@ class Page extends React.PureComponent {
       <SPage 
         canHover={isPageMode}
         isActive={isPageMode && page.pageIndex === bookmark.page}
-        onClick={() => isPageMode && onClick(page)}
+        onClick={this.handleClick}
         >
         {page.columns.map((column, i) =>
           <Column

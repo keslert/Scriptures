@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Verse from '../page-view/verse';
 import { FadeIn } from '../common/styled-animations';
+import { Subhead } from 'rebass'
 
 const StyledVerseView = styled.div`
   height: 100%;
@@ -14,13 +15,6 @@ const StyledVerseView = styled.div`
   animation: ${FadeIn} 300ms ease-out forwards;
 `
 
-const StyledTitle = styled.div`
-  margin-top: 1em;
-  color: ${props => props.theme.colors.secondary};
-  font-size: 0.9em;
-  font-family: 'Lusitana';
-`
-
 const VerseView = ({
   verse,
   label,
@@ -29,9 +23,9 @@ const VerseView = ({
   return (
     <StyledVerseView key={label}>
       <Verse {...verse} />
-      <StyledTitle>
+      <Subhead color="secondaryDark" fs={3}>
         {label}
-      </StyledTitle>
+      </Subhead>
     </StyledVerseView>
   )
 }
