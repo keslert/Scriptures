@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Page from './page';
-import { FadeIn } from '../common/styled-animations';
+import { FadeIn } from '../../styles/animations';
 
 const StyledPageView = styled.div`
   height: 100%;

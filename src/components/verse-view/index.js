@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Verse from '../page-view/verse';
-import { FadeIn } from '../common/styled-animations';
+import { FadeIn } from '../../styles/animations';
 import { Subhead } from 'rebass'
 
 const StyledVerseView = styled.div`

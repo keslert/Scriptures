@@ -1,15 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { _SecondaryButton } from '../common/styled-buttons';
+import { Button } from 'rebass';
 import { _Flex } from '../common/styled-flex';
-const _ModalFooter = styled.div`
+
+const SModalFooter = styled.div`
   display: flex;
   padding: 10px 15px;
   background: #f5f5f5;
   border-top: 1px solid #f1f1f1;
 `
 
-const _Cancel = styled(_SecondaryButton)`
+const CancelButton = styled(Button)`
   color: #808080;
   padding: 8px;
   &:hover {
@@ -21,10 +22,10 @@ const ModalFooter = ({
   children,
   onCancel
 }) => (
-  <_ModalFooter>
-    <_Flex><_Cancel onClick={onCancel}>Cancel</_Cancel></_Flex>
+  <SModalFooter>
+    <_Flex><CancelButton onClick={onCancel}>Cancel</CancelButton></_Flex>
     {children}
-  </_ModalFooter>
+  </SModalFooter>
 )
 
 export default ModalFooter;

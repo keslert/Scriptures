@@ -6,9 +6,7 @@ import { modalActions } from '../../../core/modal';
 import Modal from 'react-modal';
 import ModalBody from '../modal-body';
 import { defaultStyles } from '../modal-styles';
-
 import Icon from 'react-icons/lib/md/content-cut';
-import { _Button } from '../../common/styled-buttons';
 
 
 class BookmarkRenameModal extends React.Component {
