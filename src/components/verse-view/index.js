@@ -6,7 +6,7 @@ import { Subhead } from 'rebass'
 
 const StyledVerseView = styled.div`
   height: 100%;
-  font-size: 25px;
+  font-size: ${props => props.fontSize}px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,14 +18,13 @@ const StyledVerseView = styled.div`
 const VerseView = ({
   verse,
   label,
+  fontSize,
 }) => {
 
   return (
-    <StyledVerseView key={label}>
+    <StyledVerseView key={label} fontSize={fontSize}>
       <Verse {...verse} />
-      <Subhead color="secondaryDark" fs={3}>
-        {label}
-      </Subhead>
+      <Subhead color="secondaryDark" f='1em' children={label} />
     </StyledVerseView>
   )
 }

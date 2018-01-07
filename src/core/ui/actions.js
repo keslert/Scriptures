@@ -1,5 +1,5 @@
 import * as types from './action-types';
-import { getReadingMode } from './selectors'
+import { getReadingMode, getActiveFontSize } from './selectors'
 
 export function setReadingMode(mode) {
   return (dispatch, getState) => {
@@ -41,5 +41,30 @@ export function onMousedDownWord(word) {
 export function onMouseUp() {
   return {
     type: types.ON_MOUSE_UP,
+  }
+}
+
+function setFontSize(mode, fontSize) {
+  return {
+    type: types.SET_FONT_SIZE,
+    payload: {[mode]: fontSize}
+  }
+}
+
+export function increaseFontSize() {
+  return (dispatch, getState) => {
+    const state = getState();
+    const mode = getReadingMode(state);
+    const size = getActiveFontSize(state);
+    dispatch(setFontSize(mode, Math.min(size + 1, 50)));
+  }
+}
+
+export function decreaseFontSize() {
+  return (dispatch, getState) => {
+    const state = getState();
+    const mode = getReadingMode(state);
+    const size = getActiveFontSize(state);
+    dispatch(setFontSize(mode, Math.max(10, size - 1)));
   }
 }

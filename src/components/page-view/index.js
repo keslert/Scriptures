@@ -5,20 +5,16 @@ import { FadeIn } from '../../styles/animations';
 
 const StyledPageView = styled.div`
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  user-select: none;
+  font-size: ${props => props.fontSize}px;
   animation: ${FadeIn} 300ms ease-out forwards;
 `;
 
 const PageView = ({
   page,
+  fontSize,
 }) => {
   return (
-    <StyledPageView key={JSON.stringify(page)}>
+    <StyledPageView fontSize={fontSize}>
       <Page {...page} />
     </StyledPageView>
   )

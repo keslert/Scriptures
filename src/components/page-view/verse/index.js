@@ -12,7 +12,7 @@ const StyledVerse = styled.div`
 const Verse = ({
   lines
 }) => (
-  <StyledVerse>
+  <StyledVerse className="verse">
     {lines.map((line, i) => 
       <Line key={i} {...line} />
     )}

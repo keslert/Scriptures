@@ -8,10 +8,10 @@ class ReadingModeSelector extends React.PureComponent {
   render() {
     const { readingMode, onClick } = this.props;
 
-    const modes = ['page', 'verse'];
+    const modes = ['page', 'verse', 'scroll'];
 
     return (
-      <Flex align="center" justify="center" direction="column" p={2}>
+      <Flex align="center" justify="center" direction="column" px={2}>
         {modes.map(mode => 
           <SIcon 
             key={mode}
@@ -35,7 +35,7 @@ const SIcon = styled(Text)`
   text-transform: uppercase;
   cursor: pointer;
   ${props => `
-    border-bottom: 2px solid ${props.active ? props.theme.colors.secondary : 'transparent'};
+    // border-bottom: 2px solid ${props.active ? props.theme.colors.secondary : 'transparent'};
     color: ${props.theme.colors[props.active ? 'secondary' : 'offLight']};
   `};
 `

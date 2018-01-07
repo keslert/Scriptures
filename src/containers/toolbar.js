@@ -6,12 +6,18 @@ import { Flex, Box } from 'rebass';
 import { works } from '../core/scriptures/utils';
 import { getActiveBookmark, updateBookmark } from '../core/bookmarks'
 import { getActiveChapter } from '../core/scriptures'
-import { getReadingMode, setReadingMode } from '../core/ui'
+import { 
+  getReadingMode, 
+  setReadingMode, 
+  increaseFontSize, 
+  decreaseFontSize,
+} from '../core/ui'
 
 import ChapterSummary from '../components/chapter-summary'
 import WorksSelector from '../components/works-selector'
 import ReadingModeSelector from '../components/reading-mode-selector'
 import ScriptureSlider from '../components/scripture-slider'
+import ZoomButtons from '../components/zoom-buttons'
 
 import theme from '../styles/rebass-theme'
 
@@ -69,6 +75,10 @@ class Toolbar extends React.Component {
               readingMode={readingMode}
               onClick={this.handleReadingModeClick}
               />
+            <ZoomButtons
+              onZoomIn={this.props.increaseFontSize}
+              onZoomOut={this.props.decreaseFontSize}
+              />
           </Flex>
         </Flex>
         <Box my="-7px" pl={1}>
@@ -97,5 +107,7 @@ const mapStateToProps = createSelector(
 const mapDispatchToProps = {
   updateBookmark,
   setReadingMode,
+  increaseFontSize,
+  decreaseFontSize,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);

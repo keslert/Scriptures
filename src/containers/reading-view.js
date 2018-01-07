@@ -4,11 +4,12 @@ import { createSelector } from 'reselect';
 
 import PageView from '../components/page-view'
 import VerseView from '../components/verse-view'
+import ScrollView from '../components/scroll-view'
 import Spinner from 'react-spinkit';
 
 import { getActiveChapter, fetchBook } from '../core/scriptures';
 import { getActiveBookmark } from '../core/bookmarks';
-import { getReadingMode } from '../core/ui';
+import { getReadingMode, getActiveFontSize } from '../core/ui';
 import { capitalize } from '../core/utils';
 import { Flex, Box } from 'rebass';
 
@@ -51,34 +52,55 @@ class ReadingView extends React.Component {
   }
 
   renderPage() {
-    const { chapter, bookmark } = this.props;
+    const { chapter, bookmark, fontSize } = this.props;
 
     return (
-      <PageView page={chapter.pages[bookmark.page]} />
+      <PageView 
+        fontSize={fontSize}
+        page={chapter.pages[bookmark.page]} 
+        />
     )
   }
 
   renderVerse() {
-    const { chapter, bookmark } = this.props;
+    const { 
+      chapter: { verses }, 
+      bookmark: {book, chapter, verse},
+      fontSize,
+    } = this.props;
 
     return (
       <VerseView
-        verse={chapter.verses[bookmark.verse]} 
-        label={`${capitalize(bookmark.book)} ${bookmark.chapter + 1} : ${bookmark.verse + 1}`}
+        fontSize={fontSize}
+        verse={verses[verse]} 
+        label={`${capitalize(book)} ${chapter + 1} : ${verse + 1}`}
+        />
+    )
+  }
+
+  renderScroll() {
+    const { fontSize, chapter: { verses } } = this.props;
+    return (
+      <ScrollView
+        fontSize={fontSize}
+        verses={verses} 
         />
     )
   }
 
   render() {
-    const { chapter, isPageMode, isVerseMode } = this.props;
+    const { chapter, isPageMode, isVerseMode, isScrollMode } = this.props;
 
     if(!chapter)
       return this.renderLoading();
 
     return (
-      <Flex align="center" justify="center" flex={1}>
-        {isPageMode && this.renderPage()}
-        {isVerseMode && this.renderVerse()}
+      <Flex p={4} align="center" justify="center" flex={1} style={{overflow: 'auto'}}>
+        <Box style={{height: '100%'}}>
+          {isPageMode && this.renderPage()}
+          {isVerseMode && this.renderVerse()}
+          {isScrollMode && this.renderScroll()}
+        </Box>
       </Flex>
     );
   }
@@ -88,11 +110,14 @@ const mapStateToProps = createSelector(
   getActiveBookmark,
   getActiveChapter,
   getReadingMode,
-  (bookmark, chapter, readingMode) => ({
+  getActiveFontSize,
+  (bookmark, chapter, readingMode, fontSize) => ({
     bookmark,
     chapter,
     isPageMode: readingMode === 'page',
     isVerseMode: readingMode === 'verse',
+    isScrollMode: readingMode === 'scroll',
+    fontSize,
   })
 )
 

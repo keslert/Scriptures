@@ -6,6 +6,11 @@ export const uiState = () => ({
   mousedDownWord: null,
   mouseDown: null,
   selectedRange: null,
+  fontSizes: {
+    verse: 28,
+    scroll: 26,
+    page: 15,
+  }
 });
 
 export function uiReducer(state = uiState(), {payload, type}) {
@@ -33,6 +38,12 @@ export function uiReducer(state = uiState(), {payload, type}) {
         mousedDownWord: payload,
         selectedRange: payload ? { start: payload, end: payload } : null
       });
+
+    case types.SET_FONT_SIZE: {
+      return Object.assign({}, state, {
+        fontSizes: {...state.fontSizes, ...payload}
+      })
+    }
 
     case types.ON_MOUSE_UP:
       return Object.assign({}, state, {

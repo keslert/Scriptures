@@ -21,6 +21,10 @@ export function getMousedDownWord(state) {
   return getUI(state).mousedDownWord;
 }
 
+export function getFontSizes(state) {
+  return getUI(state).fontSizes;
+}
+
 function _getSelectedRange(state) {
   return getUI(state).selectedRange;
 }
@@ -44,4 +48,10 @@ export const getSelectedRange = createSelector(
       return selectedRange.toJS();
     }
   }
+)
+
+export const getActiveFontSize = createSelector(
+  getReadingMode,
+  getFontSizes,
+  (mode, fontSizes) => fontSizes[mode]
 )

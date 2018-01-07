@@ -42,6 +42,7 @@ export default {
     offLight: '#E2E6EA',
     lightGrey: '#E9E7E7',
     grey: '#bbb',
+    darkGray: '#999',
     gold: '#cdc1a4',
   },
   shadows: {
