@@ -1,7 +1,10 @@
 import React from 'react'
-import styled from 'styled-components'
 
 import { Box, Flex, Text } from 'rebass'
+import theme from '../styles/rebass-theme';
+import { capitalize } from 'lodash';
+
+import TransparentButton from './transparent-button';
 
 class ReadingModeSelector extends React.PureComponent {
 
@@ -12,14 +15,14 @@ class ReadingModeSelector extends React.PureComponent {
 
     return (
       <Flex align="center" justify="center" direction="column" px={2}>
-        {modes.map(mode => 
-          <SIcon 
+        {modes.map(mode =>
+          <TransparentButton 
             key={mode}
             onClick={() => onClick(mode)}
-            active={mode === readingMode}
-            >
-            {mode[0]}
-          </SIcon>
+            color={mode === readingMode ? theme.colors.secondary : theme.colors.grey}
+            hoverColor={theme.colors.secondary}
+            children={<Text bold caps>{mode[0]}</Text>}
+            />
         )}
       </Flex>
     )
@@ -27,31 +30,3 @@ class ReadingModeSelector extends React.PureComponent {
 }
 
 export default ReadingModeSelector;
-
-const SIcon = styled(Text)`
-  padding: 2px;
-  padding-bottom: 0px;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  ${props => `
-    // border-bottom: 2px solid ${props.active ? props.theme.colors.secondary : 'transparent'};
-    color: ${props.theme.colors[props.active ? 'secondary' : 'offLight']};
-  `};
-`
-
-const SCircleIcon = styled.div`
-  border-radius: 9999px;
-  ${props => `
-    line-height: ${props.height}px;
-    height: ${props.height}px;
-    width: ${props.height}px;
-    font-size: ${props.height / 2}px;
-    border: 1px solid ${props.theme.colors[props.active ? 'secondary' : 'offLight']};
-    color: ${props.theme.colors[props.active ? 'secondary' : 'offLight']};
-    &:hover {
-      border: 1px solid ${props.theme.colors.secondary};
-      color: ${props.theme.colors.secondary};
-    }
-  `};
-`

@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import { Box } from 'rebass';
 
-export default styled(Box)`
-  opacity: 0.7;
+export default styled.div`
   cursor: pointer;
-  &:hover {
-    opacity: 1;
-  }
+  ${props => `
+    color: ${props.color};
+    &:hover {
+      color: ${props.hoverColor};
+    }
+  `}
 `

@@ -14,12 +14,18 @@ class ZoomButtons extends React.PureComponent {
   render() {
     return (
       <Flex direction="column">
-        <TransparentButton onClick={this.props.onZoomIn} color={theme.colors.darkGray}>
-          <ZoomInIcon />
-        </TransparentButton>
-        <TransparentButton onClick={this.props.onZoomOut} color={theme.colors.darkGray}>
-          <ZoomOutIcon />
-        </TransparentButton>
+        <TransparentButton 
+          onClick={this.props.onZoomIn} 
+          color={theme.colors.grey}
+          hoverColor={theme.colors.secondary}
+          children={<ZoomInIcon />}
+          />
+        <TransparentButton
+          onClick={this.props.onZoomOut}
+          color={theme.colors.grey}
+          hoverColor={theme.colors.secondary}
+          children={<ZoomOutIcon />}
+          />
       </Flex>
     )
   }
